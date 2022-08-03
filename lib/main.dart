@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData.from(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 158, 46, 46)),
-      ),
+      ).copyWith(scaffoldBackgroundColor: const Color.fromARGB(255, 240, 240, 240)),
       home: const OrdersPage(),
     );
   }
