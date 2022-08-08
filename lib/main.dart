@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:orders/pages/orders.dart';
+import 'package:orders/orders/list.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -18,9 +18,11 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData.from(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 158, 46, 46)),
-      ).copyWith(scaffoldBackgroundColor: const Color.fromARGB(255, 240, 240, 240)),
-      home: const OrdersPage(),
+        colorScheme: ColorScheme.fromSeed(
+            seedColor: const Color.fromARGB(255, 158, 46, 46)),
+      ).copyWith(
+          scaffoldBackgroundColor: const Color.fromARGB(255, 240, 240, 240)),
+      home: const OrdersListPage(),
     );
   }
 }
