@@ -12,7 +12,7 @@ class OrdersPageState extends State<OrdersPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Orders'),
+        title: const Text('Pedidos'),
         leading: IconButton(
           icon: const Icon(Icons.article),
           onPressed: () {},
@@ -24,10 +24,10 @@ class OrdersPageState extends State<OrdersPage> {
           ),
         ],
       ),
-      body: const Center(child: Text('Orders')),
+      body: const Center(child: Text('Pedidos')),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
-        tooltip: 'Add Order',
+        tooltip: 'Adicionar pedido',
         child: const Icon(Icons.add),
       ),
     );
