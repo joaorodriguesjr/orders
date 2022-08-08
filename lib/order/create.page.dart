@@ -8,6 +8,8 @@ class CreateOrderPage extends StatefulWidget {
 }
 
 class _CreateOrderPageState extends State<CreateOrderPage> {
+  int _step = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +28,24 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
           ),
         ],
       ),
-      body: const Center(child: Text('Novo pedido')),
+      body: Stepper(
+        currentStep: _step,
+        onStepTapped: (index) => setState(() => _step = index),
+        controlsBuilder: (context, details) => Container(),
+        steps: [
+          Step(
+            title: const Text('Cliente'),
+            content: OutlinedButton(
+                onPressed: () {}, child: const Text('SELECIONAR CLIENTE')),
+            isActive: true,
+          ),
+          const Step(
+            title: Text('Itens'),
+            content: Text('...2'),
+            isActive: true,
+          ),
+        ],
+      ),
     );
   }
 }
