@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../order/create.dart';
+
 class OrdersListPage extends StatefulWidget {
   const OrdersListPage({Key? key}) : super(key: key);
 
@@ -26,7 +28,12 @@ class OrdersListPageState extends State<OrdersListPage> {
       ),
       body: const Center(child: Text('Pedidos')),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () async {
+          await Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const CreateOrderPage()),
+          );
+        },
         tooltip: 'Adicionar pedido',
         child: const Icon(Icons.add),
       ),
