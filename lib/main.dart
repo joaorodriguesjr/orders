@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:orders/clients/provider.dart';
 import 'package:orders/orders/list.page.dart';
+import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -14,7 +16,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    var app = MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData.from(
@@ -23,6 +25,14 @@ class MyApp extends StatelessWidget {
       ).copyWith(
           scaffoldBackgroundColor: const Color.fromARGB(255, 240, 240, 240)),
       home: const ListOrdersPage(),
+    );
+
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<ClientsProvider>(
+            create: (_) => ClientsProvider()),
+      ],
+      child: app,
     );
   }
 }

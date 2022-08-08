@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:orders/client/select.page.dart';
+import 'package:orders/clients/model.dart';
 
 class CreateOrderPage extends StatefulWidget {
   const CreateOrderPage({Key? key}) : super(key: key);
@@ -11,7 +12,7 @@ class CreateOrderPage extends StatefulWidget {
 class _CreateOrderPageState extends State<CreateOrderPage> {
   int _step = 0;
 
-  String? _client;
+  Client? _client;
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +68,8 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
             },
             child: const Text('SELECIONAR CLIENTE'))
         : ListTile(
-            title: Text('$_client'),
+            title: Text(_client?.name ?? ''),
+            subtitle: Text(_client?.address.description ?? ''),
             leading: const Icon(Icons.person),
             trailing: IconButton(
               icon: const Icon(Icons.close),

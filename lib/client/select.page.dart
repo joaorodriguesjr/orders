@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:orders/clients/provider.dart';
+import 'package:provider/provider.dart';
 
 class SelectClientPage extends StatefulWidget {
   const SelectClientPage({Key? key}) : super(key: key);
@@ -21,16 +23,24 @@ class _SelectClientPageState extends State<SelectClientPage> {
         ],
       ),
       body: Card(
-        child: ListView.separated(
-          itemCount: 5,
-          itemBuilder: (context, index) => ListTile(
-            title: Text('Cliente #${index + 1}'),
-            subtitle: Text('Endereço do cliente #${index + 1}'),
-            onTap: () => Navigator.pop(context, 'Cliente #${index + 1}'),
-          ),
-          separatorBuilder: (context, index) => const Divider(),
-        ),
+        child: _clients(),
       ),
     );
+  }
+
+  Widget _clients() {
+    return Consumer<ClientsProvider>(builder: (context, provider, _) {
+      var clients = provider.clients;
+
+      return ListView.separated(
+        itemCount: clients.length,
+        itemBuilder: (context, index) => ListTile(
+          title: Text(clients[index].name),
+          subtitle: Text(clients[index].address.description),
+          onTap: () => Navigator.pop(context, clients[index]),
+        ),
+        separatorBuilder: (context, index) => const Divider(),
+      );
+    });
   }
 }
