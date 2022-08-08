@@ -38,23 +38,7 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
         steps: [
           Step(
             title: const Text('Cliente'),
-            content: (_client == null)
-                ? OutlinedButton(
-                    onPressed: () async {
-                      final client = await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const SelectClientPage(),
-                        ),
-                      );
-                      if (client != null) {
-                        setState(() {
-                          _client = client;
-                        });
-                      }
-                    },
-                    child: const Text('SELECIONAR CLIENTE'))
-                : Text('$_client'),
+            content: _clientSelection(),
             isActive: true,
           ),
           Step(
@@ -65,5 +49,29 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
         ],
       ),
     );
+  }
+
+  Widget _clientSelection() {
+    return (_client == null)
+        ? OutlinedButton(
+            onPressed: () async {
+              final client = await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const SelectClientPage(),
+                ),
+              );
+              if (client != null) {
+                setState(() => _client = client);
+              }
+            },
+            child: const Text('SELECIONAR CLIENTE'))
+        : ListTile(
+            title: Text('$_client'),
+            trailing: IconButton(
+              icon: const Icon(Icons.close),
+              onPressed: () => setState(() => _client = null),
+            ),
+          );
   }
 }
