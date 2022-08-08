@@ -68,6 +68,7 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
             child: const Text('SELECIONAR CLIENTE'))
         : ListTile(
             title: Text('$_client'),
+            leading: const Icon(Icons.person),
             trailing: IconButton(
               icon: const Icon(Icons.close),
               onPressed: () => setState(() => _client = null),
