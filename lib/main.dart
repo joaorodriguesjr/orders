@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
             seedColor: const Color.fromARGB(255, 158, 46, 46)),
       ).copyWith(
           scaffoldBackgroundColor: const Color.fromARGB(255, 240, 240, 240)),
-      home: const OrdersListPage(),
+      home: const ListOrdersPage(),
     );
   }
 }

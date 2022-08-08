@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 import '../order/create.dart';
 
-class OrdersListPage extends StatefulWidget {
-  const OrdersListPage({Key? key}) : super(key: key);
+class ListOrdersPage extends StatefulWidget {
+  const ListOrdersPage({Key? key}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => OrdersListPageState();
+  State<StatefulWidget> createState() => ListOrdersPageState();
 }
 
-class OrdersListPageState extends State<OrdersListPage> {
+class ListOrdersPageState extends State<ListOrdersPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
