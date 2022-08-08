@@ -56,15 +56,14 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
     return (_client == null)
         ? OutlinedButton(
             onPressed: () async {
-              final client = await Navigator.push(
+              var client = await Navigator.push<Client>(
                 context,
                 MaterialPageRoute(
                   builder: (context) => const SelectClientPage(),
                 ),
               );
-              if (client != null) {
-                setState(() => _client = client);
-              }
+
+              setState(() => _client = client);
             },
             child: const Text('SELECIONAR CLIENTE'))
         : ListTile(
