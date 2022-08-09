@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:orders/order/create.page.dart';
+import 'package:orders/order/details.page.dart';
 import 'package:orders/orders/provider.dart';
 import 'package:orders/shared/currency.dart';
 import 'package:provider/provider.dart';
@@ -56,6 +57,15 @@ class ListOrdersPageState extends State<ListOrdersPage> {
               softWrap: false,
             ),
             trailing: Currency(value: provider.orders[index].total),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      OrderDetailsPage(order: provider.orders[index]),
+                ),
+              );
+            },
           );
         },
         separatorBuilder: (context, index) => const Divider(),
