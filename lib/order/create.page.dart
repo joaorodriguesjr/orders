@@ -61,7 +61,7 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
                       return;
                     }
 
-                    setState(() => _order.addItem(item));
+                    setState(() => _order.add(item));
                   },
                   icon: Icon(Icons.add, color: Theme.of(context).primaryColor),
                 ),
@@ -85,7 +85,7 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
                                 if (item.quantity > 1) {
                                   setState(() => item.decreaseQuantity());
                                 } else {
-                                  _order.items.remove(item.id);
+                                  _order.remove(item.id);
                                 }
                               });
                             },

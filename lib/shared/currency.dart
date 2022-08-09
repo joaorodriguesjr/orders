@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 class Currency extends StatelessWidget {
   final int value;
 
-  final currency = NumberFormat('R\$#,##0.00', 'pt_BR');
+  final currency = NumberFormat.currency(locale: 'pt_BR', symbol: 'R\$');
 
   Currency({Key? key, required this.value}) : super(key: key);
 
