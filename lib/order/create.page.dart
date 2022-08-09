@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:orders/client/select.page.dart';
 import 'package:orders/clients/model.dart';
@@ -109,8 +110,34 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
                 children: [
                   TextButton(
                     onPressed: (_isValid)
-                        ? () {
-                            Navigator.pop(context, _order);
+                        ? () async {
+                            // FIXME: implement the save logic on a provider
+                            var data = {
+                              'client': {
+                                'id': _client.id,
+                                'name': _client.name
+                              },
+                              'address': {
+                                'description': _client.address.description,
+                                'complement': _client.address.complement,
+                              },
+                              'datetime': Timestamp.now(),
+                              'items': {
+                                for (var item in _order.items.values)
+                                  item.id: {
+                                    'description': item.description,
+                                    'price': item.price,
+                                    'quantity': item.quantity,
+                                  }
+                              },
+                            };
+
+                            await FirebaseFirestore.instance
+                                .collection('orders')
+                                .doc()
+                                .set(data);
+
+                            Navigator.pop(context);
                           }
                         : null,
                     child: const Text('SALVAR'),
