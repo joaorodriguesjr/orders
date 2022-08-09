@@ -1,3 +1,4 @@
+import 'package:android_intent_plus/android_intent.dart';
 import 'package:flutter/material.dart';
 import 'package:orders/orders/model.dart';
 import 'package:orders/shared/currency.dart';
@@ -46,7 +47,14 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
             title: Text(order.address.description,
                 softWrap: false, overflow: TextOverflow.fade),
             subtitle: const Text('Visualizar no mapa'),
-            onTap: () {},
+            onTap: () {
+              AndroidIntent(
+                action: 'action_view',
+                package: 'com.google.android.apps.maps',
+                data:
+                    'http://maps.google.com/maps?daddr=${Uri.encodeFull(order.address.description)}',
+              ).launch();
+            },
           ),
           ListTile(
             leading: const Icon(Icons.whatsapp),
