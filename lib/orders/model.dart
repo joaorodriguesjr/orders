@@ -1,3 +1,4 @@
+import 'package:orders/clients/model.dart';
 import 'package:orders/items/model.dart';
 
 class OrderItem {
@@ -25,8 +26,8 @@ class OrderItem {
 
 class Order {
   String id = '';
-  String client = '';
-  String address = '';
+  Client client = Client();
+  Address address = Address();
   Map<String, OrderItem> items = {};
 
   add(Item item) {

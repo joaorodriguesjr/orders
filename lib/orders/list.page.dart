@@ -49,9 +49,9 @@ class ListOrdersPageState extends State<ListOrdersPage> {
         itemCount: provider.orders.length,
         itemBuilder: (context, index) {
           return ListTile(
-            title: Text(provider.orders[index].client),
+            title: Text(provider.orders[index].client.name),
             subtitle: Text(
-              provider.orders[index].address,
+              provider.orders[index].address.description,
               overflow: TextOverflow.fade,
               softWrap: false,
             ),

@@ -28,13 +28,14 @@ class OrdersProvider extends ChangeNotifier {
   Order _orderFromDocument(DocumentSnapshot doc) {
     var order = Order()
       ..id = doc.id
-      ..client = doc.get('client')
-      ..address = doc.get('address');
+      ..client.id = doc.get('client')['id']
+      ..client.name = doc.get('client')['name']
+      ..address.description = doc.get('address')['description']
+      ..address.complement = doc.get('address')['complement'];
 
-    for (var item in doc.get('items')) {
-      order.items[item['id']] =
-          OrderItem(item['id'], item['description'], item['price']);
-    }
+    doc.get('items').forEach((key, value) {
+      order.items[key] = OrderItem(key, value['description'], value['price']);
+    });
 
     return order;
   }
