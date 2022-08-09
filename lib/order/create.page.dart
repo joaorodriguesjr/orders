@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:orders/client/select.page.dart';
 import 'package:orders/clients/model.dart';
-import 'package:orders/items/model.dart';
 import 'package:orders/orders/model.dart';
 
 import '../item/select.page.dart';
