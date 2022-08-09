@@ -17,7 +17,7 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
     ..name = 'Selecionar Cliente'
     ..address.description = '. . . . . .';
 
-  Order _order = Order();
+  final _order = Order();
 
   @override
   Widget build(BuildContext context) {
