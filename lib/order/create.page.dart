@@ -104,12 +104,27 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
                 }).toList(),
               ),
               const Padding(padding: EdgeInsets.all(8)),
+              ButtonBar(
+                alignment: MainAxisAlignment.center,
+                children: [
+                  TextButton(
+                    onPressed: (_isValid)
+                        ? () {
+                            Navigator.pop(context, _order);
+                          }
+                        : null,
+                    child: const Text('SALVAR'),
+                  ),
+                ],
+              )
             ],
           ),
         ),
       ),
     );
   }
+
+  bool get _isValid => _client.id.isNotEmpty && _order.items.isNotEmpty;
 
   Widget _clientSelection() {
     return ListTile(
