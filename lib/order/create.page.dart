@@ -47,7 +47,7 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
               const Padding(padding: EdgeInsets.all(8), child: Divider()),
               ListTile(
                 title: const Text('Items do Pedido'),
-                leading: const Icon(Icons.list_alt),
+                leading: const Icon(Icons.format_list_numbered),
                 trailing: IconButton(
                   onPressed: () async {
                     var item = await Navigator.push(
