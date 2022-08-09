@@ -14,8 +14,8 @@ class CreateOrderPage extends StatefulWidget {
 
 class _CreateOrderPageState extends State<CreateOrderPage> {
   var _client = Client()
-    ..name = 'Selecionar Cliente'
-    ..address.description = '. . . . . .';
+    ..name = 'Cliente. . .'
+    ..address.description = '. . .';
 
   final _order = Order();
 
