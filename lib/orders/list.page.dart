@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-
-import '../order/create.page.dart';
+import 'package:orders/order/create.page.dart';
+import 'package:orders/orders/provider.dart';
+import 'package:orders/shared/currency.dart';
+import 'package:provider/provider.dart';
 
 class ListOrdersPage extends StatefulWidget {
   const ListOrdersPage({Key? key}) : super(key: key);
@@ -26,7 +28,7 @@ class ListOrdersPageState extends State<ListOrdersPage> {
           ),
         ],
       ),
-      body: const Center(child: Text('Pedidos')),
+      body: SingleChildScrollView(child: Card(child: _orders())),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           await Navigator.push(
@@ -38,5 +40,26 @@ class ListOrdersPageState extends State<ListOrdersPage> {
         child: const Icon(Icons.add),
       ),
     );
+  }
+
+  Widget _orders() {
+    return Consumer<OrdersProvider>(builder: (context, provider, child) {
+      return ListView.separated(
+        shrinkWrap: true,
+        itemCount: provider.orders.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: Text(provider.orders[index].client),
+            subtitle: Text(
+              provider.orders[index].address,
+              overflow: TextOverflow.fade,
+              softWrap: false,
+            ),
+            trailing: Currency(value: provider.orders[index].total),
+          );
+        },
+        separatorBuilder: (context, index) => const Divider(),
+      );
+    });
   }
 }

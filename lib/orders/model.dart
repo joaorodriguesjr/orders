@@ -26,6 +26,7 @@ class OrderItem {
 class Order {
   String id = '';
   String client = '';
+  String address = '';
   Map<String, OrderItem> items = {};
 
   addItem(item) {
@@ -34,5 +35,9 @@ class Order {
     } else {
       items[item.id] = OrderItem.from(item);
     }
+  }
+
+  int get total {
+    return items.values.fold(0, (int total, item) => total + item.price);
   }
 }
