@@ -33,6 +33,7 @@ class _SelectClientPageState extends State<SelectClientPage> {
       var clients = provider.clients;
 
       return ListView.separated(
+        shrinkWrap: true,
         itemCount: clients.length,
         itemBuilder: (context, index) => ListTile(
           title: Text(clients[index].name),

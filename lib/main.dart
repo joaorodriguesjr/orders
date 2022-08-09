@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:orders/clients/provider.dart';
 import 'package:orders/orders/list.page.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
+
+import 'clients/provider.dart';
+import 'items/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,6 +33,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<ClientsProvider>(
             create: (_) => ClientsProvider()),
+        ChangeNotifierProvider<ItemsProvider>(create: (_) => ItemsProvider()),
       ],
       child: app,
     );

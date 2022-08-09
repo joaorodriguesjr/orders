@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:orders/client/select.page.dart';
 import 'package:orders/clients/model.dart';
+import 'package:orders/items/model.dart';
+import 'package:orders/orders/model.dart';
+
+import '../item/select.page.dart';
 
 class CreateOrderPage extends StatefulWidget {
   const CreateOrderPage({Key? key}) : super(key: key);
@@ -10,9 +14,11 @@ class CreateOrderPage extends StatefulWidget {
 }
 
 class _CreateOrderPageState extends State<CreateOrderPage> {
-  int _step = 0;
+  Client _client = Client()
+    ..name = 'Selecionar Cliente'
+    ..address.description = '. . . . . .';
 
-  Client? _client;
+  Order _order = Order();
 
   @override
   Widget build(BuildContext context) {
@@ -32,48 +38,99 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
           ),
         ],
       ),
-      body: Stepper(
-        currentStep: _step,
-        onStepTapped: (index) => setState(() => _step = index),
-        controlsBuilder: (context, details) => Container(),
-        steps: [
-          Step(
-            title: const Text('Cliente'),
-            content: _clientSelection(),
-            isActive: true,
-          ),
-          Step(
-            title: const Text('Itens'),
-            content: const Text('...2'),
-            isActive: (_client != null),
-          ),
-        ],
+      body: Card(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Padding(padding: EdgeInsets.all(8)),
+            _clientSelection(),
+            const Padding(padding: EdgeInsets.all(8), child: Divider()),
+            ListTile(
+              title: const Text('Items do Pedido'),
+              leading: const Icon(Icons.list_alt),
+              trailing: IconButton(
+                onPressed: () async {
+                  var item = await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SelectItemPage(),
+                    ),
+                  );
+
+                  if (item == null) {
+                    return;
+                  }
+
+                  setState(() => _order.addItem(item));
+                },
+                icon: Icon(Icons.add, color: Theme.of(context).primaryColor),
+              ),
+            ),
+            DataTable(
+              columns: const [
+                DataColumn(label: Text('Item')),
+                DataColumn(label: Text('Quantidade')),
+              ],
+              rows: _order.items.values.map((item) {
+                return DataRow(
+                  cells: [
+                    DataCell(Expanded(flex: 2, child: Text(item.description))),
+                    DataCell(Row(
+                      children: [
+                        IconButton(
+                          icon: const Icon(Icons.remove),
+                          onPressed: () {
+                            setState(() {
+                              if (item.quantity > 1) {
+                                setState(() => item.decreaseQuantity());
+                              } else {
+                                _order.items.remove(item.id);
+                              }
+                            });
+                          },
+                        ),
+                        Text('${item.quantity}'),
+                        IconButton(
+                          icon: const Icon(Icons.add),
+                          onPressed: () {
+                            setState(() => item.increaseQuantity());
+                          },
+                        ),
+                      ],
+                    )),
+                  ],
+                );
+              }).toList(),
+            ),
+            const Padding(padding: EdgeInsets.all(8)),
+          ],
+        ),
       ),
     );
   }
 
   Widget _clientSelection() {
-    return (_client == null)
-        ? OutlinedButton(
-            onPressed: () async {
-              var client = await Navigator.push<Client>(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const SelectClientPage(),
-                ),
-              );
-
-              setState(() => _client = client);
-            },
-            child: const Text('SELECIONAR CLIENTE'))
-        : ListTile(
-            title: Text(_client!.name),
-            subtitle: Text(_client!.address.description),
-            leading: const Icon(Icons.person),
-            trailing: IconButton(
-              icon: const Icon(Icons.close),
-              onPressed: () => setState(() => _client = null),
+    return ListTile(
+      title: Text(_client.name),
+      subtitle: Text(_client.address.description),
+      leading: const Icon(Icons.person),
+      trailing: IconButton(
+        icon: Icon(Icons.add, color: Theme.of(context).primaryColor),
+        onPressed: () async {
+          var client = await Navigator.push<Client>(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const SelectClientPage(),
             ),
           );
+
+          if (client == null) {
+            return;
+          }
+
+          setState(() => _client = client);
+        },
+      ),
+    );
   }
 }
