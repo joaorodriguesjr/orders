@@ -37,72 +37,75 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
           ),
         ],
       ),
-      body: Card(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Padding(padding: EdgeInsets.all(8)),
-            _clientSelection(),
-            const Padding(padding: EdgeInsets.all(8), child: Divider()),
-            ListTile(
-              title: const Text('Items do Pedido'),
-              leading: const Icon(Icons.list_alt),
-              trailing: IconButton(
-                onPressed: () async {
-                  var item = await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const SelectItemPage(),
-                    ),
-                  );
+      body: SingleChildScrollView(
+        child: Card(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Padding(padding: EdgeInsets.all(8)),
+              _clientSelection(),
+              const Padding(padding: EdgeInsets.all(8), child: Divider()),
+              ListTile(
+                title: const Text('Items do Pedido'),
+                leading: const Icon(Icons.list_alt),
+                trailing: IconButton(
+                  onPressed: () async {
+                    var item = await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SelectItemPage(),
+                      ),
+                    );
 
-                  if (item == null) {
-                    return;
-                  }
+                    if (item == null) {
+                      return;
+                    }
 
-                  setState(() => _order.addItem(item));
-                },
-                icon: Icon(Icons.add, color: Theme.of(context).primaryColor),
+                    setState(() => _order.addItem(item));
+                  },
+                  icon: Icon(Icons.add, color: Theme.of(context).primaryColor),
+                ),
               ),
-            ),
-            DataTable(
-              columns: const [
-                DataColumn(label: Text('Item')),
-                DataColumn(label: Text('Quantidade')),
-              ],
-              rows: _order.items.values.map((item) {
-                return DataRow(
-                  cells: [
-                    DataCell(Expanded(flex: 2, child: Text(item.description))),
-                    DataCell(Row(
-                      children: [
-                        IconButton(
-                          icon: const Icon(Icons.remove),
-                          onPressed: () {
-                            setState(() {
-                              if (item.quantity > 1) {
-                                setState(() => item.decreaseQuantity());
-                              } else {
-                                _order.items.remove(item.id);
-                              }
-                            });
-                          },
-                        ),
-                        Text('${item.quantity}'),
-                        IconButton(
-                          icon: const Icon(Icons.add),
-                          onPressed: () {
-                            setState(() => item.increaseQuantity());
-                          },
-                        ),
-                      ],
-                    )),
-                  ],
-                );
-              }).toList(),
-            ),
-            const Padding(padding: EdgeInsets.all(8)),
-          ],
+              DataTable(
+                columns: const [
+                  DataColumn(label: Text('Item')),
+                  DataColumn(label: Text('Quantidade')),
+                ],
+                rows: _order.items.values.map((item) {
+                  return DataRow(
+                    cells: [
+                      DataCell(
+                          Expanded(flex: 2, child: Text(item.description))),
+                      DataCell(Row(
+                        children: [
+                          IconButton(
+                            icon: const Icon(Icons.remove),
+                            onPressed: () {
+                              setState(() {
+                                if (item.quantity > 1) {
+                                  setState(() => item.decreaseQuantity());
+                                } else {
+                                  _order.items.remove(item.id);
+                                }
+                              });
+                            },
+                          ),
+                          Text('${item.quantity}'),
+                          IconButton(
+                            icon: const Icon(Icons.add),
+                            onPressed: () {
+                              setState(() => item.increaseQuantity());
+                            },
+                          ),
+                        ],
+                      )),
+                    ],
+                  );
+                }).toList(),
+              ),
+              const Padding(padding: EdgeInsets.all(8)),
+            ],
+          ),
         ),
       ),
     );
