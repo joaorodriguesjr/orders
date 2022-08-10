@@ -71,7 +71,7 @@ class ListOrdersPageState extends State<ListOrdersPage> {
               var snackBar = SnackBar(
                 behavior: SnackBarBehavior.floating,
                 content: Text(
-                    '${order.client.name} \n\n ${order.address.description} \n ${order.address.complement}'),
+                    '${order.client.name} \n\n ${order.address.description}. \n - ${order.address.complement} -'),
               );
 
               ScaffoldMessenger.of(context).showSnackBar(snackBar);
