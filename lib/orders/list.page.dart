@@ -66,6 +66,16 @@ class ListOrdersPageState extends State<ListOrdersPage> {
                 ),
               );
             },
+            onLongPress: () {
+              var order = provider.orders[index];
+              var snackBar = SnackBar(
+                behavior: SnackBarBehavior.floating,
+                content: Text(
+                    '${order.client.name} \n\n ${order.address.description} \n ${order.address.complement}'),
+              );
+
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            },
           );
         },
         separatorBuilder: (context, index) => const Divider(),
