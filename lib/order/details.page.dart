@@ -65,7 +65,14 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
             leading: const Icon(Icons.whatsapp),
             title: const Text('+00 (00) 00000-0000'),
             subtitle: const Text('Enviar mensagem via WhatsApp'),
-            onTap: () {},
+            onTap: () {
+              AndroidIntent(
+                package: 'com.whatsapp',
+                action: 'action_view',
+                data: Uri.encodeFull(
+                    'https://api.whatsapp.com/send?phone=0000000000000'),
+              ).launch();
+            },
           ),
           const Padding(
             padding: EdgeInsets.all(8.0),
@@ -91,7 +98,14 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
             children: [
               IconButton(
                 icon: const Icon(Icons.share, color: Colors.black54),
-                onPressed: () {},
+                onPressed: () {
+                  AndroidIntent(
+                    package: 'com.whatsapp',
+                    action: 'action_view',
+                    data: Uri.encodeFull(
+                        'https://api.whatsapp.com/send?phone=0000000000000&text=${_confirmation()}'),
+                  ).launch();
+                },
               ),
               IconButton(
                 icon: const Icon(Icons.print, color: Colors.black54),
@@ -156,5 +170,26 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
         "[C]Obrigado pela \n[C]preferencia!!!\n";
 
     return ticket;
+  }
+
+  String _confirmation() {
+    initializeDateFormatting('pt_BR');
+    var datetime = DateFormat.yMMMMd('pt_BR').format(DateTime.now());
+    var message = '' +
+        "*Familia Delivery*\n\n" +
+        "${datetime}\n\n" +
+        "${widget.order.client.name}\n" +
+        "${widget.order.address.description}. [${widget.order.address.complement}]\n" +
+        "\n";
+
+    for (var item in widget.order.items.entries) {
+      message +=
+          "```${item.value.quantity}x ${item.value.description} R\$${item.value.quantity * item.value.price},00```\n";
+    }
+    message += "\n" +
+        "```Total R\$${widget.order.total},00```\n" +
+        "\nPagamento:  PIX     *PAGO*\n" +
+        "";
+    return message;
   }
 }
