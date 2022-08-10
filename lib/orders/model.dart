@@ -43,7 +43,8 @@ class Order {
   }
 
   int get total {
-    return items.values.fold(0, (int total, item) => total + item.price);
+    return items.values
+        .fold(0, (int total, item) => total + item.price * item.quantity);
   }
 
   _increaseItemQuantity(String id) {

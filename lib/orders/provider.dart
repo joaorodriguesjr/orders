@@ -34,7 +34,8 @@ class OrdersProvider extends ChangeNotifier {
       ..address.complement = doc.get('address')['complement'];
 
     doc.get('items').forEach((key, value) {
-      order.items[key] = OrderItem(key, value['description'], value['price']);
+      order.items[key] = OrderItem(key, value['description'], value['price'])
+        ..quantity = value['quantity'];
     });
 
     return order;
