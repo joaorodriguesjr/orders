@@ -31,7 +31,9 @@ class OrdersProvider extends ChangeNotifier {
       ..client.id = doc.get('client')['id']
       ..client.name = doc.get('client')['name']
       ..address.description = doc.get('address')['description']
-      ..address.complement = doc.get('address')['complement'];
+      ..address.complement = doc.get('address')['complement']
+      ..payment.kind = doc.get('payment')['kind']
+      ..payment.status = doc.get('payment')['status'];
 
     doc.get('items').forEach((key, value) {
       order.items[key] = OrderItem(key, value['description'], value['price'])

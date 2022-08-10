@@ -24,11 +24,17 @@ class OrderItem {
   }
 }
 
+class Payment {
+  String kind = '';
+  String status = '';
+}
+
 class Order {
   String id = '';
   Client client = Client();
   Address address = Address();
   Map<String, OrderItem> items = {};
+  Payment payment = Payment();
 
   add(Item item) {
     if (items.containsKey(item.id)) {

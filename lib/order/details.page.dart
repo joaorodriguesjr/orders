@@ -93,6 +93,82 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
             ),
           ),
           const Divider(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Radio(
+                          groupValue: order.payment.kind,
+                          value: 'PIX',
+                          onChanged: (value) {
+                            setState(
+                                () => order.payment.kind = value as String);
+                          }),
+                      const Text('Pix'),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Radio(
+                          groupValue: order.payment.kind,
+                          value: 'DINHEIRO',
+                          onChanged: (value) {
+                            setState(
+                                () => order.payment.kind = value as String);
+                          }),
+                      const Text('Dinheiro'),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Radio(
+                          groupValue: order.payment.kind,
+                          value: 'CARTAO',
+                          onChanged: (value) {
+                            setState(
+                                () => order.payment.kind = value as String);
+                          }),
+                      const Text('Cartão'),
+                    ],
+                  ),
+                ],
+              ),
+              Column(
+                children: [
+                  Row(
+                    children: [
+                      Radio(
+                          groupValue: order.payment.status,
+                          value: 'PAGO',
+                          onChanged: (value) {
+                            setState(
+                                () => order.payment.status = value as String);
+                          }),
+                      const Text('Recebido'),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Radio(
+                          groupValue: order.payment.status,
+                          value: 'A RECEBER',
+                          onChanged: (value) {
+                            setState(
+                                () => order.payment.status = value as String);
+                          }),
+                      const Text('A Receber'),
+                    ],
+                  ),
+                ],
+              ),
+              const Padding(padding: EdgeInsets.only(right: 0.0)),
+            ],
+          ),
+          const Divider(),
           ButtonBar(
             alignment: MainAxisAlignment.end,
             children: [
@@ -103,7 +179,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                     package: 'com.whatsapp',
                     action: 'action_view',
                     data: Uri.encodeFull(
-                        'https://api.whatsapp.com/send?phone=0000000000000&text=${_confirmation()}'),
+                        'https://api.whatsapp.com/send?phone=5531993390417&text=${_confirmation()}'),
                   ).launch();
                 },
               ),
@@ -153,7 +229,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
         "[C]<font size='tall'>Familia Delivery</font>\n\n" +
         "[C]${datetime}\n\n" +
         "[L]Cliente: [R]${widget.order.client.name}\n" +
-        "[L]${widget.order.address.description}. [${widget.order.address.complement}]\n" +
+        "[L]${widget.order.address.description}.   ${widget.order.address.complement}\n" +
         "--------------------------------\n" +
         "";
 
@@ -165,8 +241,8 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
     ticket += "\n" +
         "[R]<b>Total</b> R\$${widget.order.total},00\n" +
         "--------------------------------\n" +
-        "[L]Pagamento: [R]PIX\n" +
-        "\n[C]<font size='big'>PAGO</font>\n\n" +
+        "[L]Pagamento: [R]${widget.order.payment.kind}\n" +
+        "\n[C]<font size='big'>${widget.order.payment.status}</font>\n\n" +
         "[C]Obrigado pela \n[C]preferencia!!!\n";
 
     return ticket;
@@ -179,16 +255,16 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
         "*Familia Delivery*\n\n" +
         "${datetime}\n\n" +
         "${widget.order.client.name}\n" +
-        "${widget.order.address.description}. [${widget.order.address.complement}]\n" +
-        "\n";
+        "${widget.order.address.description}. [ *${widget.order.address.complement}* ]\n" +
+        "\n\n";
 
     for (var item in widget.order.items.entries) {
       message +=
           "```${item.value.quantity}x ${item.value.description} R\$${item.value.quantity * item.value.price},00```\n";
     }
     message += "\n" +
-        "```Total R\$${widget.order.total},00```\n" +
-        "\nPagamento:  PIX     *PAGO*\n" +
+        "```Total R\$${widget.order.total},00```\n\n" +
+        "\nPagamento:  ${widget.order.payment.kind}  *${widget.order.payment.status}*\n" +
         "";
     return message;
   }
