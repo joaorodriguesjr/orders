@@ -25,6 +25,7 @@ public class MainActivity extends FlutterActivity {
         methodChannel.setMethodCallHandler((call, result) -> {
             if (call.method.equals("print")) {
                 try {
+                    if (printer == null) connectPrinter();
                     printer.printFormattedText(call.argument("text"), 7.0f);
                 } catch (Exception e) {
                     printer = null;
