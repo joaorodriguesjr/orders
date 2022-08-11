@@ -11,37 +11,31 @@ import com.dantsu.escposprinter.connection.bluetooth.BluetoothConnection;
 import com.dantsu.escposprinter.connection.bluetooth.BluetoothPrintersConnections;
 import com.dantsu.escposprinter.EscPosCharsetEncoding;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class MainActivity extends FlutterActivity {
     private static final String CHANNEL_NAME = "delivery.printer";
-
-    private EscPosPrinter printer;
 
     @Override
     public void configureFlutterEngine(@NonNull FlutterEngine flutterEngine) {
         super.configureFlutterEngine(flutterEngine);
         MethodChannel methodChannel = new MethodChannel(flutterEngine.getDartExecutor().getBinaryMessenger(), CHANNEL_NAME);
-        connectPrinter();
+        Logger logger = Logger.getAnonymousLogger();
 
         methodChannel.setMethodCallHandler((call, result) -> {
             if (call.method.equals("print")) {
                 try {
-                    if (printer == null) connectPrinter();
+                    BluetoothConnection connection = BluetoothPrintersConnections.selectFirstPaired();
+                    EscPosPrinter printer = new EscPosPrinter(connection, 203, 48f, 32);
                     printer.printFormattedText(call.argument("text"), 7.0f);
+                    printer.disconnectPrinter();
                 } catch (Exception e) {
-                    printer = null;
+                    logger.log(Level.SEVERE, "An exception was thrown", e);
                 }
             } else {
                 result.notImplemented();
             }
         });
-    }
-
-    private void connectPrinter() {
-        try {
-            BluetoothConnection connection = BluetoothPrintersConnections.selectFirstPaired();
-            printer = new EscPosPrinter(connection, 203, 48f, 32);
-        } catch (Exception e) {
-            printer = null;
-        }
     }
 }
