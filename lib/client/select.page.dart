@@ -17,12 +17,13 @@ class _SelectClientPageState extends State<SelectClientPage> {
         title: const Text('Selecionar Cliente'),
         actions: [
           IconButton(
-            icon: const Icon(Icons.more_vert),
+            icon: const Icon(Icons.search),
             onPressed: () {},
           ),
         ],
       ),
       body: Card(
+        margin: const EdgeInsets.all(8),
         child: _clients(),
       ),
     );
