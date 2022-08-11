@@ -42,4 +42,9 @@ class OrdersProvider extends ChangeNotifier {
 
     return order;
   }
+
+  void deleteOrder(Order order) {
+    FirebaseFirestore.instance.collection('orders').doc(order.id).delete().then(
+        (_) => _updateOrders(orders.where((o) => o.id != order.id).toList()));
+  }
 }

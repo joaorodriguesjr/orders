@@ -5,6 +5,8 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:orders/orders/model.dart';
 import 'package:orders/shared/currency.dart';
+import 'package:orders/orders/provider.dart';
+import 'package:provider/provider.dart';
 
 class OrderDetailsPage extends StatefulWidget {
   final Order order;
@@ -26,8 +28,34 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
         title: const Text('Detalhes do Pedido'),
         actions: [
           IconButton(
-            icon: const Icon(Icons.more_vert),
-            onPressed: () {},
+            icon: const Icon(Icons.delete_forever),
+            onPressed: () async {
+              final navigator = Navigator.of(context);
+              var delete = await showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: const Text('Excluir Pedido'),
+                  content: const Text(
+                      'A exclusão é uma ação permanente. Deseja realmente excluir o pedido?'),
+                  actions: [
+                    TextButton(
+                      child: const Text('Cancelar'),
+                      onPressed: () => Navigator.pop(context, false),
+                    ),
+                    TextButton(
+                      child: const Text('Excluir'),
+                      onPressed: () {
+                        Provider.of<OrdersProvider>(context, listen: false)
+                            .deleteOrder(order);
+                        Navigator.pop(context, true);
+                      },
+                    ),
+                  ],
+                ),
+              );
+
+              if (delete) navigator.pop();
+            },
           ),
         ],
       ),
