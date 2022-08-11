@@ -27,7 +27,7 @@ class ListOrdersPageState extends State<ListOrdersPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Pedidos'),
+        title: const Text('Lista de Pedidos'),
         actions: [
           IconButton(
             icon: const Icon(Icons.calendar_today),
@@ -75,7 +75,7 @@ class ListOrdersPageState extends State<ListOrdersPage> {
           child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.only(top: 16.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -83,7 +83,8 @@ class ListOrdersPageState extends State<ListOrdersPage> {
               ],
             ),
           ),
-          Card(child: _orders()),
+          Card(margin: const EdgeInsets.all(16.0), child: _orders()),
+          const Padding(padding: EdgeInsets.symmetric(vertical: 14.0)),
         ],
       )),
       floatingActionButton: FloatingActionButton(
@@ -103,6 +104,7 @@ class ListOrdersPageState extends State<ListOrdersPage> {
     return Consumer<OrdersProvider>(builder: (context, provider, child) {
       return ListView.separated(
         shrinkWrap: true,
+        primary: false,
         itemCount: provider.orders.length,
         itemBuilder: (context, index) {
           return ListTile(
