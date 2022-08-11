@@ -16,13 +16,13 @@ class ListOrdersPage extends StatefulWidget {
 }
 
 class ListOrdersPageState extends State<ListOrdersPage> {
-  DateTime _date = DateTime.now();
-
   @override
   Widget build(BuildContext context) {
+    var ordersProvider = Provider.of<OrdersProvider>(context);
+
     String format() {
       initializeDateFormatting('pt_BR', null);
-      return DateFormat.MMMMEEEEd('pt_BR').format(_date);
+      return DateFormat.MMMMEEEEd('pt_BR').format(ordersProvider.date);
     }
 
     return Scaffold(
@@ -34,16 +34,14 @@ class ListOrdersPageState extends State<ListOrdersPage> {
             onPressed: () async {
               final date = await showDatePicker(
                 context: context,
-                initialDate: _date,
+                initialDate: ordersProvider.date,
                 firstDate: DateTime(2020),
                 lastDate: DateTime(2025),
               );
 
               if (date == null) return;
 
-              setState(() {
-                _date = date;
-              });
+              ordersProvider.changeDate(date);
             },
           ),
           IconButton(
@@ -92,7 +90,8 @@ class ListOrdersPageState extends State<ListOrdersPage> {
           await Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => CreateOrderPage(date: _date)),
+                builder: (context) =>
+                    CreateOrderPage(date: ordersProvider.date)),
           );
         },
         tooltip: 'Adicionar pedido',

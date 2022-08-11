@@ -35,6 +35,7 @@ class Order {
   Address address = Address();
   Map<String, OrderItem> items = {};
   Payment payment = Payment();
+  DateTime datetime = DateTime.now();
 
   add(Item item) {
     if (items.containsKey(item.id)) {
