@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:orders/client/select.page.dart';
-import 'package:orders/clients/model.dart';
 import 'package:orders/orders/model.dart';
 
 import '../item/select.page.dart';
