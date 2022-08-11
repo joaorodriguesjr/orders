@@ -36,8 +36,10 @@ class _SelectClientPageState extends State<SelectClientPage> {
         shrinkWrap: true,
         itemCount: clients.length,
         itemBuilder: (context, index) => ListTile(
+          leading: const Icon(Icons.person),
           title: Text(clients[index].name),
-          subtitle: Text(clients[index].address.description),
+          subtitle: Text(clients[index].address.description,
+              overflow: TextOverflow.ellipsis),
           onTap: () => Navigator.pop(context, clients[index]),
         ),
         separatorBuilder: (context, index) => const Divider(),
