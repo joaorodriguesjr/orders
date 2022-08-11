@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
+import 'package:orders/order/update.page.dart';
 import 'package:orders/orders/model.dart';
 import 'package:orders/shared/currency.dart';
 import 'package:orders/orders/provider.dart';
@@ -200,7 +201,21 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                     children: [
                       TextButton(
                         child: const Text('EDITAR'),
-                        onPressed: () async {},
+                        onPressed: () async {
+                          var updatedOrder = await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  UpdateOrderPage(order: order),
+                            ),
+                          );
+
+                          if (updatedOrder == null) return;
+
+                          setState(() {
+                            order = updatedOrder as Order;
+                          });
+                        },
                       ),
                       TextButton(
                         child: const Text('EXCLUIR'),
