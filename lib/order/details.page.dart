@@ -186,8 +186,12 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                   ),
                   const Divider(),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
+                      TextButton(
+                        child: const Text('EDITAR'),
+                        onPressed: () async {},
+                      ),
                       TextButton(
                         child: const Text('EXCLUIR'),
                         onPressed: () async {
