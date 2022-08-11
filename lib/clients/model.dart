@@ -6,5 +6,6 @@ class Address {
 class Client {
   String id = '';
   String name = '';
+  String phone = '';
   Address address = Address();
 }

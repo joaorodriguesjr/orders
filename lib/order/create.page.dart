@@ -194,7 +194,8 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
                             var data = {
                               'client': {
                                 'id': _client.id,
-                                'name': _client.name
+                                'name': _client.name,
+                                'phone': _client.phone,
                               },
                               'address': {
                                 'description': _client.address.description,

@@ -41,7 +41,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                 package: 'com.whatsapp',
                 action: 'action_view',
                 data: Uri.encodeFull(
-                    'https://api.whatsapp.com/send?phone=5531993390417&text=${_confirmation()}'),
+                    'https://api.whatsapp.com/send?phone=${order.client.phone}&text=${_confirmation()}'),
               ).launch();
             },
           ),
@@ -80,14 +80,14 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                   ),
                   ListTile(
                     leading: const Icon(Icons.whatsapp),
-                    title: const Text('+00 (00) 00000-0000'),
+                    title: Text(order.client.phone),
                     subtitle: const Text('Enviar mensagem via WhatsApp'),
                     onTap: () {
                       AndroidIntent(
                         package: 'com.whatsapp',
                         action: 'action_view',
                         data: Uri.encodeFull(
-                            'https://api.whatsapp.com/send?phone=0000000000000'),
+                            'https://api.whatsapp.com/send?phone=${order.client.phone}'),
                       ).launch();
                     },
                   ),

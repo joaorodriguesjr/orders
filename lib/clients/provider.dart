@@ -17,6 +17,7 @@ class ClientsProvider extends ChangeNotifier {
       var client = Client();
       client.id = doc.id;
       client.name = data['name'];
+      client.phone = data['phone'];
       client.address.description = data['address']['description'];
       client.address.complement = data['address']['complement'];
       return client;

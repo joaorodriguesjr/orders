@@ -40,6 +40,7 @@ class OrdersProvider extends ChangeNotifier {
       ..id = doc.id
       ..client.id = doc.get('client')['id']
       ..client.name = doc.get('client')['name']
+      ..client.phone = doc.get('client')['phone']
       ..address.description = doc.get('address')['description']
       ..address.complement = doc.get('address')['complement']
       ..payment.kind = doc.get('payment')['kind']
