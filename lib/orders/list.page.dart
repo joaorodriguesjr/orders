@@ -1,5 +1,7 @@
 import 'package:android_intent_plus/android_intent.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
 import 'package:orders/order/create.page.dart';
 import 'package:orders/order/details.page.dart';
 import 'package:orders/orders/provider.dart';
@@ -14,16 +16,36 @@ class ListOrdersPage extends StatefulWidget {
 }
 
 class ListOrdersPageState extends State<ListOrdersPage> {
+  DateTime _date = DateTime.now();
+
   @override
   Widget build(BuildContext context) {
+    String format() {
+      initializeDateFormatting('pt_BR', null);
+      return DateFormat.MMMMEEEEd('pt_BR').format(_date);
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Pedidos'),
-        leading: IconButton(
-          icon: const Icon(Icons.article),
-          onPressed: () {},
-        ),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.calendar_today),
+            onPressed: () async {
+              final date = await showDatePicker(
+                context: context,
+                initialDate: _date,
+                firstDate: DateTime(2020),
+                lastDate: DateTime(2025),
+              );
+
+              if (date == null) return;
+
+              setState(() {
+                _date = date;
+              });
+            },
+          ),
           IconButton(
             icon: const Icon(Icons.map),
             onPressed: () {
@@ -47,13 +69,23 @@ class ListOrdersPageState extends State<ListOrdersPage> {
               ).launch();
             },
           ),
-          IconButton(
-            icon: const Icon(Icons.more_vert),
-            onPressed: () {},
-          ),
         ],
       ),
-      body: SingleChildScrollView(child: Card(child: _orders())),
+      body: SingleChildScrollView(
+          child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(format(), style: const TextStyle(color: Colors.black54)),
+              ],
+            ),
+          ),
+          Card(child: _orders()),
+        ],
+      )),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           await Navigator.push(
@@ -74,6 +106,7 @@ class ListOrdersPageState extends State<ListOrdersPage> {
         itemCount: provider.orders.length,
         itemBuilder: (context, index) {
           return ListTile(
+            leading: const Icon(Icons.inventory_outlined),
             title: Text(provider.orders[index].client.name),
             subtitle: Text(
               provider.orders[index].address.description,
