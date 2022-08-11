@@ -18,7 +18,9 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
     ..name = 'Cliente. . .'
     ..address.description = '. . .';
 
-  final _order = Order();
+  final _order = Order()
+    ..payment.kind = 'PIX'
+    ..payment.status = 'A RECEBER';
 
   @override
   Widget build(BuildContext context) {
@@ -104,6 +106,82 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
                   );
                 }).toList(),
               ),
+              const Divider(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Radio(
+                              groupValue: _order.payment.kind,
+                              value: 'PIX',
+                              onChanged: (value) {
+                                setState(() =>
+                                    _order.payment.kind = value as String);
+                              }),
+                          const Text('Pix'),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Radio(
+                              groupValue: _order.payment.kind,
+                              value: 'DINHEIRO',
+                              onChanged: (value) {
+                                setState(() =>
+                                    _order.payment.kind = value as String);
+                              }),
+                          const Text('Dinheiro'),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Radio(
+                              groupValue: _order.payment.kind,
+                              value: 'CARTAO',
+                              onChanged: (value) {
+                                setState(() =>
+                                    _order.payment.kind = value as String);
+                              }),
+                          const Text('Cartão'),
+                        ],
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Row(
+                        children: [
+                          Radio(
+                              groupValue: _order.payment.status,
+                              value: 'PAGO',
+                              onChanged: (value) {
+                                setState(() =>
+                                    _order.payment.status = value as String);
+                              }),
+                          const Text('Recebido'),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Radio(
+                              groupValue: _order.payment.status,
+                              value: 'A RECEBER',
+                              onChanged: (value) {
+                                setState(() =>
+                                    _order.payment.status = value as String);
+                              }),
+                          const Text('A Receber'),
+                        ],
+                      ),
+                    ],
+                  ),
+                  const Padding(padding: EdgeInsets.only(right: 0.0)),
+                ],
+              ),
               const Padding(padding: EdgeInsets.all(8)),
               ButtonBar(
                 alignment: MainAxisAlignment.center,
@@ -131,8 +209,8 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
                                   }
                               },
                               'payment': {
-                                'kind': 'PIX',
-                                'status': 'A RECEBER',
+                                'kind': _order.payment.kind,
+                                'status': _order.payment.status,
                               },
                             };
 
