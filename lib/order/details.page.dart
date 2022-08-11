@@ -28,199 +28,202 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
         title: const Text('Detalhes do Pedido'),
         actions: [
           IconButton(
-            icon: const Icon(Icons.delete_forever),
-            onPressed: () async {
-              final navigator = Navigator.of(context);
-              var delete = await showDialog(
-                context: context,
-                builder: (context) => AlertDialog(
-                  title: const Text('Excluir Pedido'),
-                  content: const Text(
-                      'A exclusão é uma ação permanente. Deseja realmente excluir o pedido?'),
-                  actions: [
-                    TextButton(
-                      child: const Text('Cancelar'),
-                      onPressed: () => Navigator.pop(context, false),
-                    ),
-                    TextButton(
-                      child: const Text('Excluir'),
-                      onPressed: () {
-                        Provider.of<OrdersProvider>(context, listen: false)
-                            .deleteOrder(order);
-                        Navigator.pop(context, true);
-                      },
-                    ),
-                  ],
-                ),
-              );
-
-              if (delete) navigator.pop();
+            icon: const Icon(Icons.print),
+            onPressed: () {
+              printer.invokeMethod('print', {'text': _ticket()});
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.share),
+            onPressed: () {
+              AndroidIntent(
+                package: 'com.whatsapp',
+                action: 'action_view',
+                data: Uri.encodeFull(
+                    'https://api.whatsapp.com/send?phone=5531993390417&text=${_confirmation()}'),
+              ).launch();
             },
           ),
         ],
       ),
       body: SingleChildScrollView(
           child: Card(
+              margin: const EdgeInsets.all(8),
               child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0.0, 16.0, 0.0, 8.0),
-                child: Text(
-                  order.client.name,
-                  style: const TextStyle(fontSize: 20),
-                ),
-              ),
-            ],
-          ),
-          ListTile(
-            leading: const Icon(Icons.location_on),
-            title: Text(order.address.description,
-                softWrap: false, overflow: TextOverflow.fade),
-            subtitle: const Text('Visualizar no mapa'),
-            onTap: () {
-              AndroidIntent(
-                action: 'action_view',
-                package: 'com.google.android.apps.maps',
-                data:
-                    'http://maps.google.com/maps?daddr=${Uri.encodeFull(order.address.description)}',
-              ).launch();
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.whatsapp),
-            title: const Text('+00 (00) 00000-0000'),
-            subtitle: const Text('Enviar mensagem via WhatsApp'),
-            onTap: () {
-              AndroidIntent(
-                package: 'com.whatsapp',
-                action: 'action_view',
-                data: Uri.encodeFull(
-                    'https://api.whatsapp.com/send?phone=0000000000000'),
-              ).launch();
-            },
-          ),
-          const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Divider(),
-          ),
-          _items(),
-          Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Container(
-                    margin: const EdgeInsets.only(right: 16.0),
-                    child: const Text('Total')),
-                Currency(value: order.total),
-              ],
-            ),
-          ),
-          const Divider(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Radio(
-                          groupValue: order.payment.kind,
-                          value: 'PIX',
-                          onChanged: (value) {
-                            setState(
-                                () => order.payment.kind = value as String);
-                          }),
-                      const Text('Pix'),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0.0, 16.0, 0.0, 8.0),
+                        child: Text(
+                          order.client.name,
+                          style: const TextStyle(fontSize: 20),
+                        ),
+                      ),
                     ],
                   ),
+                  ListTile(
+                    leading: const Icon(Icons.location_on),
+                    title: Text(order.address.description,
+                        softWrap: false, overflow: TextOverflow.fade),
+                    subtitle: const Text('Visualizar no mapa'),
+                    onTap: () {
+                      AndroidIntent(
+                        action: 'action_view',
+                        package: 'com.google.android.apps.maps',
+                        data:
+                            'http://maps.google.com/maps?daddr=${Uri.encodeFull(order.address.description)}',
+                      ).launch();
+                    },
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.whatsapp),
+                    title: const Text('+00 (00) 00000-0000'),
+                    subtitle: const Text('Enviar mensagem via WhatsApp'),
+                    onTap: () {
+                      AndroidIntent(
+                        package: 'com.whatsapp',
+                        action: 'action_view',
+                        data: Uri.encodeFull(
+                            'https://api.whatsapp.com/send?phone=0000000000000'),
+                      ).launch();
+                    },
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Divider(),
+                  ),
+                  _items(),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 24.0, vertical: 16.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Container(
+                            margin: const EdgeInsets.only(right: 16.0),
+                            child: const Text('Total')),
+                        Currency(value: order.total),
+                      ],
+                    ),
+                  ),
+                  const Divider(),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Radio(
-                          groupValue: order.payment.kind,
-                          value: 'DINHEIRO',
-                          onChanged: (value) {
-                            setState(
-                                () => order.payment.kind = value as String);
-                          }),
-                      const Text('Dinheiro'),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Radio(
+                                  groupValue: order.payment.kind,
+                                  value: 'PIX',
+                                  onChanged: (value) {
+                                    setState(() =>
+                                        order.payment.kind = value as String);
+                                  }),
+                              const Text('Pix'),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Radio(
+                                  groupValue: order.payment.kind,
+                                  value: 'DINHEIRO',
+                                  onChanged: (value) {
+                                    setState(() =>
+                                        order.payment.kind = value as String);
+                                  }),
+                              const Text('Dinheiro'),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Radio(
+                                  groupValue: order.payment.kind,
+                                  value: 'CARTAO',
+                                  onChanged: (value) {
+                                    setState(() =>
+                                        order.payment.kind = value as String);
+                                  }),
+                              const Text('Cartão'),
+                            ],
+                          ),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          Row(
+                            children: [
+                              Radio(
+                                  groupValue: order.payment.status,
+                                  value: 'PAGO',
+                                  onChanged: (value) {
+                                    setState(() =>
+                                        order.payment.status = value as String);
+                                  }),
+                              const Text('Recebido'),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Radio(
+                                  groupValue: order.payment.status,
+                                  value: 'A RECEBER',
+                                  onChanged: (value) {
+                                    setState(() =>
+                                        order.payment.status = value as String);
+                                  }),
+                              const Text('A Receber'),
+                            ],
+                          ),
+                        ],
+                      ),
+                      const Padding(padding: EdgeInsets.only(right: 0.0)),
                     ],
                   ),
+                  const Divider(),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Radio(
-                          groupValue: order.payment.kind,
-                          value: 'CARTAO',
-                          onChanged: (value) {
-                            setState(
-                                () => order.payment.kind = value as String);
-                          }),
-                      const Text('Cartão'),
+                      TextButton(
+                        child: const Text('EXCLUIR'),
+                        onPressed: () async {
+                          final navigator = Navigator.of(context);
+                          var delete = await showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: const Text('Excluir Pedido'),
+                              content: const Text(
+                                  'A exclusão é uma ação permanente. Deseja realmente excluir o pedido?'),
+                              actions: [
+                                TextButton(
+                                  child: const Text('Cancelar'),
+                                  onPressed: () =>
+                                      Navigator.pop(context, false),
+                                ),
+                                TextButton(
+                                  child: const Text('Excluir'),
+                                  onPressed: () {
+                                    Provider.of<OrdersProvider>(context,
+                                            listen: false)
+                                        .deleteOrder(order);
+                                    Navigator.pop(context, true);
+                                  },
+                                ),
+                              ],
+                            ),
+                          );
+
+                          if (delete) navigator.pop();
+                        },
+                      ),
                     ],
                   ),
                 ],
-              ),
-              Column(
-                children: [
-                  Row(
-                    children: [
-                      Radio(
-                          groupValue: order.payment.status,
-                          value: 'PAGO',
-                          onChanged: (value) {
-                            setState(
-                                () => order.payment.status = value as String);
-                          }),
-                      const Text('Recebido'),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Radio(
-                          groupValue: order.payment.status,
-                          value: 'A RECEBER',
-                          onChanged: (value) {
-                            setState(
-                                () => order.payment.status = value as String);
-                          }),
-                      const Text('A Receber'),
-                    ],
-                  ),
-                ],
-              ),
-              const Padding(padding: EdgeInsets.only(right: 0.0)),
-            ],
-          ),
-          const Divider(),
-          ButtonBar(
-            alignment: MainAxisAlignment.end,
-            children: [
-              IconButton(
-                icon: const Icon(Icons.share, color: Colors.black54),
-                onPressed: () {
-                  AndroidIntent(
-                    package: 'com.whatsapp',
-                    action: 'action_view',
-                    data: Uri.encodeFull(
-                        'https://api.whatsapp.com/send?phone=5531993390417&text=${_confirmation()}'),
-                  ).launch();
-                },
-              ),
-              IconButton(
-                icon: const Icon(Icons.print, color: Colors.black54),
-                onPressed: () {
-                  printer.invokeMethod('print', {'text': _ticket()});
-                },
-              ),
-            ],
-          ),
-        ],
-      ))),
+              ))),
     );
   }
 
