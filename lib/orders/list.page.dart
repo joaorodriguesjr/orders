@@ -91,7 +91,8 @@ class ListOrdersPageState extends State<ListOrdersPage> {
         onPressed: () async {
           await Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const CreateOrderPage()),
+            MaterialPageRoute(
+                builder: (context) => CreateOrderPage(date: _date)),
           );
         },
         tooltip: 'Adicionar pedido',

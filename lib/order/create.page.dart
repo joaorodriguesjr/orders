@@ -7,7 +7,9 @@ import 'package:orders/orders/model.dart';
 import '../item/select.page.dart';
 
 class CreateOrderPage extends StatefulWidget {
-  const CreateOrderPage({Key? key}) : super(key: key);
+  final DateTime date;
+
+  const CreateOrderPage({Key? key, required this.date}) : super(key: key);
 
   @override
   State<CreateOrderPage> createState() => _CreateOrderPageState();
@@ -198,7 +200,7 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
                                 'description': _client.address.description,
                                 'complement': _client.address.complement,
                               },
-                              'datetime': Timestamp.now(),
+                              'datetime': widget.date.toUtc(),
                               'items': {
                                 for (var item in _order.items.values)
                                   item.id: {
