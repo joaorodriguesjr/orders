@@ -66,7 +66,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                   ListTile(
                     leading: const Icon(Icons.location_on),
                     title: Text(order.address.description,
-                        softWrap: false, overflow: TextOverflow.fade),
+                        softWrap: false, overflow: TextOverflow.ellipsis),
                     subtitle: const Text('Visualizar no mapa'),
                     onTap: () {
                       AndroidIntent(
