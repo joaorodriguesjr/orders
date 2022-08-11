@@ -73,7 +73,7 @@ class ListOrdersPageState extends State<ListOrdersPage> {
           child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 16.0),
+            padding: const EdgeInsets.fromLTRB(0.0, 16.0, 0.0, 8.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
