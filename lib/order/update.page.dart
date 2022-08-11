@@ -188,7 +188,8 @@ class _UpdateOrderPageState extends State<UpdateOrderPage> {
                             var data = {
                               'client': {
                                 'id': _order.client.id,
-                                'name': _order.client.name
+                                'name': _order.client.name,
+                                'phone': _order.client.phone,
                               },
                               'address': {
                                 'description': _order.address.description,
