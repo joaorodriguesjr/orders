@@ -81,7 +81,7 @@ class ListOrdersPageState extends State<ListOrdersPage> {
               ],
             ),
           ),
-          Card(margin: const EdgeInsets.all(16.0), child: _orders()),
+          Card(margin: const EdgeInsets.all(8.0), child: _orders()),
           const Padding(padding: EdgeInsets.symmetric(vertical: 14.0)),
         ],
       )),
