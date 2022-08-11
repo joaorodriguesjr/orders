@@ -117,37 +117,43 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                         children: [
                           Row(
                             children: [
-                              Radio(
-                                  groupValue: order.payment.kind,
-                                  value: 'PIX',
-                                  onChanged: (value) {
-                                    setState(() =>
-                                        order.payment.kind = value as String);
-                                  }),
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(
+                                    12.0, 8.0, 12.0, 8.0),
+                                child: (order.payment.kind != 'PIX')
+                                    ? const Icon(Icons.check_box_outline_blank,
+                                        color: Colors.black45)
+                                    : const Icon(Icons.check_box,
+                                        color: Colors.black45),
+                              ),
                               const Text('Pix'),
                             ],
                           ),
                           Row(
                             children: [
-                              Radio(
-                                  groupValue: order.payment.kind,
-                                  value: 'DINHEIRO',
-                                  onChanged: (value) {
-                                    setState(() =>
-                                        order.payment.kind = value as String);
-                                  }),
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(
+                                    12.0, 8.0, 12.0, 8.0),
+                                child: (order.payment.kind != 'DINHEIRO')
+                                    ? const Icon(Icons.check_box_outline_blank,
+                                        color: Colors.black45)
+                                    : const Icon(Icons.check_box,
+                                        color: Colors.black45),
+                              ),
                               const Text('Dinheiro'),
                             ],
                           ),
                           Row(
                             children: [
-                              Radio(
-                                  groupValue: order.payment.kind,
-                                  value: 'CARTAO',
-                                  onChanged: (value) {
-                                    setState(() =>
-                                        order.payment.kind = value as String);
-                                  }),
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(
+                                    12.0, 8.0, 12.0, 8.0),
+                                child: (order.payment.kind != 'CARTAO')
+                                    ? const Icon(Icons.check_box_outline_blank,
+                                        color: Colors.black45)
+                                    : const Icon(Icons.check_box,
+                                        color: Colors.black45),
+                              ),
                               const Text('Cartão'),
                             ],
                           ),
@@ -157,25 +163,29 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                         children: [
                           Row(
                             children: [
-                              Radio(
-                                  groupValue: order.payment.status,
-                                  value: 'PAGO',
-                                  onChanged: (value) {
-                                    setState(() =>
-                                        order.payment.status = value as String);
-                                  }),
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(
+                                    12.0, 8.0, 12.0, 8.0),
+                                child: (order.payment.status != 'PAGO')
+                                    ? const Icon(Icons.check_box_outline_blank,
+                                        color: Colors.black45)
+                                    : const Icon(Icons.check_box,
+                                        color: Colors.black45),
+                              ),
                               const Text('Recebido'),
                             ],
                           ),
                           Row(
                             children: [
-                              Radio(
-                                  groupValue: order.payment.status,
-                                  value: 'A RECEBER',
-                                  onChanged: (value) {
-                                    setState(() =>
-                                        order.payment.status = value as String);
-                                  }),
+                              Padding(
+                                padding: const EdgeInsets.fromLTRB(
+                                    12.0, 8.0, 12.0, 8.0),
+                                child: (order.payment.status != 'A RECEBER')
+                                    ? const Icon(Icons.check_box_outline_blank,
+                                        color: Colors.black45)
+                                    : const Icon(Icons.check_box,
+                                        color: Colors.black45),
+                              ),
                               const Text('A Receber'),
                             ],
                           ),
