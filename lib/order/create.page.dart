@@ -130,6 +130,10 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
                                     'quantity': item.quantity,
                                   }
                               },
+                              'payment': {
+                                'kind': 'PIX',
+                                'status': 'A RECEBER',
+                              },
                             };
 
                             await FirebaseFirestore.instance
