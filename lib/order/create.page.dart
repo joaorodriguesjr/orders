@@ -14,9 +14,7 @@ class CreateOrderPage extends StatefulWidget {
 }
 
 class _CreateOrderPageState extends State<CreateOrderPage> {
-  var _client = Client()
-    ..name = 'Cliente. . .'
-    ..address.description = '. . .';
+  var _client = Client()..name = 'Cliente';
 
   final _order = Order()
     ..payment.kind = 'PIX'
@@ -26,7 +24,7 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Novo Pedido'),
+        title: const Text('Registrar Pedido'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -42,6 +40,7 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
       ),
       body: SingleChildScrollView(
         child: Card(
+          margin: const EdgeInsets.all(8),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -50,7 +49,7 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
               const Padding(padding: EdgeInsets.all(8), child: Divider()),
               ListTile(
                 title: const Text('Items do Pedido'),
-                leading: const Icon(Icons.format_list_numbered),
+                leading: const Icon(Icons.inventory_outlined),
                 trailing: IconButton(
                   onPressed: () async {
                     var item = await Navigator.push(
@@ -106,7 +105,7 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
                   );
                 }).toList(),
               ),
-              const Divider(),
+              const Padding(padding: EdgeInsets.all(8), child: Divider()),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -238,7 +237,9 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
   Widget _clientSelection() {
     return ListTile(
       title: Text(_client.name),
-      subtitle: Text(_client.address.description),
+      subtitle: (_client.address.description != '')
+          ? Text(_client.address.description)
+          : null,
       leading: const Icon(Icons.person),
       trailing: IconButton(
         icon: Icon(Icons.add, color: Theme.of(context).primaryColor),
