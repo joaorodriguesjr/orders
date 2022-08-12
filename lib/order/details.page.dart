@@ -284,7 +284,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
 
   String _ticket() {
     initializeDateFormatting('pt_BR');
-    var datetime = DateFormat.yMMMMd('pt_BR').format(DateTime.now());
+    var datetime = DateFormat.yMMMMd('pt_BR').format(widget.order.datetime);
     var ticket = '' +
         "[C]<font size='tall'>Familia Delivery</font>\n\n" +
         "[C]${datetime}\n\n" +
@@ -310,7 +310,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
 
   String _confirmation() {
     initializeDateFormatting('pt_BR');
-    var datetime = DateFormat.yMMMMd('pt_BR').format(DateTime.now());
+    var datetime = DateFormat.yMMMMd('pt_BR').format(widget.order.datetime);
     var message = '' +
         "*Familia Delivery*\n\n" +
         "${datetime}\n\n" +
