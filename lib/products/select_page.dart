@@ -18,7 +18,7 @@ class _SelectProductPageState extends State<SelectProductPage> {
         title: const Text('Selecionar Produto'),
         actions: [
           IconButton(
-            icon: const Icon(Icons.more_vert),
+            icon: const Icon(Icons.search),
             onPressed: () {},
           ),
         ],
