@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 
 import 'clients/provider.dart';
-import 'items/provider.dart';
+import 'products/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,7 +34,8 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<ClientsProvider>(
             create: (_) => ClientsProvider()),
-        ChangeNotifierProvider<ItemsProvider>(create: (_) => ItemsProvider()),
+        ChangeNotifierProvider<ProductsProvider>(
+            create: (_) => ProductsProvider()),
         ChangeNotifierProvider<OrdersProvider>(create: (_) => OrdersProvider()),
       ],
       child: app,

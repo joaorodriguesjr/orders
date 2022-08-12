@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:orders/client/select.page.dart';
 import 'package:orders/clients/model.dart';
 import 'package:orders/orders/model.dart';
-import 'package:orders/items/select_page.dart';
+import 'package:orders/products/select_page.dart';
 
 class CreateOrderPage extends StatefulWidget {
   final DateTime date;
@@ -56,7 +56,7 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
                     var item = await Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const SelectItemPage(),
+                        builder: (context) => const SelectProductPage(),
                       ),
                     );
 

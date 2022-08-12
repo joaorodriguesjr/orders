@@ -1,5 +1,5 @@
 import 'package:orders/clients/model.dart';
-import 'package:orders/items/model.dart';
+import 'package:orders/products/model.dart';
 
 class OrderItem {
   String id = '';
@@ -11,8 +11,8 @@ class OrderItem {
     quantity = 1;
   }
 
-  factory OrderItem.from(Item item) {
-    return OrderItem(item.id, item.description, item.price);
+  factory OrderItem.from(Product product) {
+    return OrderItem(product.id, product.description, product.price);
   }
 
   increaseQuantity() {
@@ -37,12 +37,12 @@ class Order {
   Payment payment = Payment();
   DateTime datetime = DateTime.now();
 
-  add(Item item) {
-    if (items.containsKey(item.id)) {
-      return _increaseItemQuantity(item.id);
+  add(Product product) {
+    if (items.containsKey(product.id)) {
+      return _increaseItemQuantity(product.id);
     }
 
-    items[item.id] = OrderItem.from(item);
+    items[product.id] = OrderItem.from(product);
   }
 
   remove(String id) {

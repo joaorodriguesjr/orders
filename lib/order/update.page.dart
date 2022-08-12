@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:orders/orders/model.dart';
-import 'package:orders/items/select_page.dart';
+import 'package:orders/products/select_page.dart';
 
 class UpdateOrderPage extends StatefulWidget {
   final Order order;
@@ -50,7 +50,7 @@ class _UpdateOrderPageState extends State<UpdateOrderPage> {
                     var item = await Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const SelectItemPage(),
+                        builder: (context) => const SelectProductPage(),
                       ),
                     );
 
