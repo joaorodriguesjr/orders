@@ -25,4 +25,20 @@ class ClientsProvider extends ChangeNotifier {
 
     notifyListeners();
   }
+
+  registerClient(Client client) async {
+    var doc = await FirebaseFirestore.instance.collection('clients').add({
+      'name': client.name,
+      'phone': client.phone,
+      'address': {
+        'description': client.address.description,
+        'complement': client.address.complement,
+      },
+    });
+
+    client.id = doc.id;
+    clients.add(client);
+
+    notifyListeners();
+  }
 }

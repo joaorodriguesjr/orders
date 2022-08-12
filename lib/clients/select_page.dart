@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:orders/clients/create_page.dart';
 import 'package:orders/clients/provider.dart';
 import 'package:provider/provider.dart';
 
@@ -12,6 +13,8 @@ class SelectClientPage extends StatefulWidget {
 class _SelectClientPageState extends State<SelectClientPage> {
   @override
   Widget build(BuildContext context) {
+    var navigator = Navigator.of(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Selecionar Cliente'),
@@ -25,6 +28,18 @@ class _SelectClientPageState extends State<SelectClientPage> {
       body: Card(
         margin: const EdgeInsets.all(8),
         child: _clients(),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          final client = await navigator.push(
+            MaterialPageRoute(builder: (context) => const CreateClientPage()),
+          );
+
+          if (client == null) return;
+
+          navigator.pop(client);
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }
