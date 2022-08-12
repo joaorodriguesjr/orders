@@ -77,8 +77,7 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
                 rows: _order.items.values.map((item) {
                   return DataRow(
                     cells: [
-                      DataCell(
-                          Expanded(flex: 2, child: Text(item.description))),
+                      DataCell(Text(item.description)),
                       DataCell(Row(
                         children: [
                           IconButton(
