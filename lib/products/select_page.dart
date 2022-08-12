@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:orders/products/provider.dart';
+import 'package:orders/shared/currency.dart';
 import 'package:provider/provider.dart';
 
 class SelectProductPage extends StatefulWidget {
@@ -23,6 +24,7 @@ class _SelectProductPageState extends State<SelectProductPage> {
         ],
       ),
       body: Card(
+        margin: const EdgeInsets.all(8),
         child: _products(),
       ),
     );
@@ -37,7 +39,8 @@ class _SelectProductPageState extends State<SelectProductPage> {
         itemCount: products.length,
         itemBuilder: (context, index) => ListTile(
           title: Text(products[index].description),
-          trailing: Text(products[index].price.toString()),
+          leading: const Icon(Icons.dinner_dining),
+          trailing: Currency(value: products[index].price),
           onTap: () => Navigator.pop(context, products[index]),
         ),
         separatorBuilder: (context, index) => const Divider(),
