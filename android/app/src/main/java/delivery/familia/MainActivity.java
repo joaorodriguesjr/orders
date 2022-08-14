@@ -27,7 +27,7 @@ public class MainActivity extends FlutterActivity {
             if (call.method.equals("print")) {
                 try {
                     BluetoothConnection connection = BluetoothPrintersConnections.selectFirstPaired();
-                    EscPosPrinter printer = new EscPosPrinter(connection, 203, 48f, 32);
+                    EscPosPrinter printer = new EscPosPrinter(connection, 203, 48f, 32, new EscPosCharsetEncoding("IBM860", 3));
                     printer.printFormattedText(call.argument("text"), 7.0f);
                     printer.disconnectPrinter();
                 } catch (Exception e) {
