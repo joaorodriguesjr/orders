@@ -1,9 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:orders/clients/select_page.dart';
 import 'package:orders/clients/model.dart';
 import 'package:orders/orders/model.dart';
+import 'package:orders/orders/provider.dart';
 import 'package:orders/products/select_page.dart';
+import 'package:provider/provider.dart';
 
 class CreateOrderPage extends StatefulWidget {
   final DateTime date;
@@ -23,6 +24,9 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
 
   @override
   Widget build(BuildContext context) {
+    var navigator = Navigator.of(context);
+    var provider = Provider.of<OrdersProvider>(context, listen: false);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Registrar Pedido'),
@@ -188,38 +192,8 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
                   TextButton(
                     onPressed: (_isValid)
                         ? () async {
-                            // FIXME: implement the save logic on a provider
-                            var data = {
-                              'client': {
-                                'id': _client.id,
-                                'name': _client.name,
-                                'phone': _client.phone,
-                              },
-                              'address': {
-                                'description': _client.address.description,
-                                'complement': _client.address.complement,
-                              },
-                              'datetime': widget.date.toUtc(),
-                              'items': {
-                                for (var item in _order.items.values)
-                                  item.product.id: {
-                                    'description': item.product.description,
-                                    'price': item.product.price,
-                                    'quantity': item.quantity,
-                                  }
-                              },
-                              'payment': {
-                                'kind': _order.payment.kind,
-                                'status': _order.payment.status,
-                              },
-                            };
-
-                            await FirebaseFirestore.instance
-                                .collection('orders')
-                                .doc()
-                                .set(data);
-
-                            Navigator.pop(context);
+                            await provider.registerOrder(_order, _client);
+                            navigator.pop();
                           }
                         : null,
                     child: const Text('SALVAR'),

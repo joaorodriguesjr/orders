@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:orders/clients/model.dart';
 import 'package:orders/orders/model.dart';
 
 class OrdersProvider extends ChangeNotifier {
@@ -60,6 +61,35 @@ class OrdersProvider extends ChangeNotifier {
     await _subscription.cancel();
     _subscription = _stream().listen(_updateOrders);
     notifyListeners();
+  }
+
+  Future<void> registerOrder(Order order, Client client) async {
+    var data = {
+      'client': {
+        'id': client.id,
+        'name': client.name,
+        'phone': client.phone,
+      },
+      'address': {
+        'description': client.address.description,
+        'complement': client.address.complement,
+      },
+      'datetime': order.datetime.toUtc(),
+      'items': {
+        for (var item in order.items.values)
+          item.product.id: {
+            'description': item.product.description,
+            'price': item.product.price,
+            'quantity': item.quantity,
+          }
+      },
+      'payment': {
+        'kind': order.payment.kind,
+        'status': order.payment.status,
+      },
+    };
+
+    await FirebaseFirestore.instance.collection('orders').add(data);
   }
 
   void deleteOrder(Order order) {
