@@ -21,7 +21,12 @@ class _SelectClientPageState extends State<SelectClientPage> {
         actions: [
           IconButton(
             icon: const Icon(Icons.search),
-            onPressed: () {},
+            onPressed: () async {
+              var client = await showSearch(
+                  context: context, delegate: _SearchClientDelegate());
+
+              navigator.pop(client);
+            },
           ),
         ],
       ),
@@ -61,5 +66,58 @@ class _SelectClientPageState extends State<SelectClientPage> {
         separatorBuilder: (context, index) => const Divider(),
       );
     });
+  }
+}
+
+class _SearchClientDelegate extends SearchDelegate {
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    return [
+      IconButton(
+        icon: const Icon(Icons.clear),
+        onPressed: () {
+          query = '';
+        },
+      ),
+    ];
+  }
+
+  @override
+  Widget buildLeading(BuildContext context) {
+    return IconButton(
+      icon: const Icon(Icons.arrow_back),
+      onPressed: () {
+        close(context, null);
+      },
+    );
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    return const Center();
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    var provider = Provider.of<ClientsProvider>(context);
+    var suggestions = provider.clients
+        .where((client) => client.name.toLowerCase().contains(query))
+        .toList();
+
+    return Card(
+      margin: const EdgeInsets.all(8),
+      child: ListView.separated(
+        shrinkWrap: true,
+        itemCount: suggestions.length,
+        itemBuilder: (context, index) => ListTile(
+          leading: const Icon(Icons.person),
+          title: Text(suggestions[index].name),
+          subtitle: Text(suggestions[index].address.description,
+              overflow: TextOverflow.ellipsis),
+          onTap: () => close(context, suggestions[index]),
+        ),
+        separatorBuilder: (context, index) => const Divider(),
+      ),
+    );
   }
 }

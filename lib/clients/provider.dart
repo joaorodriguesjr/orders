@@ -10,7 +10,10 @@ class ClientsProvider extends ChangeNotifier {
   }
 
   _loadClients() async {
-    var snapshot = await FirebaseFirestore.instance.collection('clients').get();
+    var snapshot = await FirebaseFirestore.instance
+        .collection('clients')
+        .orderBy('name')
+        .get();
 
     clients = snapshot.docs.map((doc) {
       var data = doc.data();
