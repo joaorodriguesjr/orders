@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:orders/clients/model.dart';
@@ -5,28 +7,38 @@ import 'package:orders/clients/model.dart';
 class ClientsProvider extends ChangeNotifier {
   List<Client> clients = [];
 
+  late StreamSubscription<List<Client>> _subscription;
+
   ClientsProvider() {
-    _loadClients();
+    _subscription = _stream().listen(_updateClients);
   }
 
-  _loadClients() async {
-    var snapshot = await FirebaseFirestore.instance
+  _updateClients(List<Client> clients) {
+    this.clients = clients;
+    notifyListeners();
+  }
+
+  Stream<List<Client>> _stream() {
+    return FirebaseFirestore.instance
         .collection('clients')
         .orderBy('name')
-        .get();
+        .snapshots()
+        .map(_mapSnapshot);
+  }
 
-    clients = snapshot.docs.map((doc) {
-      var data = doc.data();
-      var client = Client();
-      client.id = doc.id;
-      client.name = data['name'];
-      client.phone = data['phone'];
-      client.address.description = data['address']['description'];
-      client.address.complement = data['address']['complement'];
-      return client;
-    }).toList();
+  List<Client> _mapSnapshot(QuerySnapshot snapshot) {
+    return snapshot.docs.map(_clientFromDocument).toList();
+  }
 
-    notifyListeners();
+  Client _clientFromDocument(DocumentSnapshot doc) {
+    var data = doc.data() as Map<String, dynamic>;
+
+    return Client()
+      ..id = doc.id
+      ..name = data['name']
+      ..phone = data['phone']
+      ..address.description = data['address']['description']
+      ..address.complement = data['address']['complement'];
   }
 
   registerClient(Client client) async {
