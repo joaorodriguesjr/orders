@@ -48,8 +48,8 @@ class OrdersProvider extends ChangeNotifier {
       ..datetime = doc.get('datetime').toDate();
 
     doc.get('items').forEach((key, value) {
-      order.items[key] = OrderItem(key, value['description'], value['price'])
-        ..quantity = value['quantity'];
+      order.items[key] = Item.fromData(
+          key, value['description'], value['price'], value['quantity']);
     });
 
     return order;

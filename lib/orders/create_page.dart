@@ -77,7 +77,7 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
                 rows: _order.items.values.map((item) {
                   return DataRow(
                     cells: [
-                      DataCell(Text(item.description)),
+                      DataCell(Text(item.product.description)),
                       DataCell(Row(
                         children: [
                           IconButton(
@@ -87,7 +87,7 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
                                 if (item.quantity > 1) {
                                   setState(() => item.decreaseQuantity());
                                 } else {
-                                  _order.remove(item.id);
+                                  _order.remove(item.product.id);
                                 }
                               });
                             },
@@ -202,9 +202,9 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
                               'datetime': widget.date.toUtc(),
                               'items': {
                                 for (var item in _order.items.values)
-                                  item.id: {
-                                    'description': item.description,
-                                    'price': item.price,
+                                  item.product.id: {
+                                    'description': item.product.description,
+                                    'price': item.product.price,
                                     'quantity': item.quantity,
                                   }
                               },

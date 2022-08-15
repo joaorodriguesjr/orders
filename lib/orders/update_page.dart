@@ -71,7 +71,7 @@ class _UpdateOrderPageState extends State<UpdateOrderPage> {
                 rows: _order.items.values.map((item) {
                   return DataRow(
                     cells: [
-                      DataCell(Text(item.description)),
+                      DataCell(Text(item.product.description)),
                       DataCell(Row(
                         children: [
                           IconButton(
@@ -81,7 +81,7 @@ class _UpdateOrderPageState extends State<UpdateOrderPage> {
                                 if (item.quantity > 1) {
                                   setState(() => item.decreaseQuantity());
                                 } else {
-                                  _order.remove(item.id);
+                                  _order.remove(item.product.id);
                                 }
                               });
                             },
@@ -196,9 +196,9 @@ class _UpdateOrderPageState extends State<UpdateOrderPage> {
                               'datetime': widget.order.datetime,
                               'items': {
                                 for (var item in _order.items.values)
-                                  item.id: {
-                                    'description': item.description,
-                                    'price': item.price,
+                                  item.product.id: {
+                                    'description': item.product.description,
+                                    'price': item.product.price,
                                     'quantity': item.quantity,
                                   }
                               },

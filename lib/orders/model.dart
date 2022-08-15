@@ -1,18 +1,25 @@
 import 'package:orders/clients/model.dart';
 import 'package:orders/products/model.dart';
 
-class OrderItem {
-  String id = '';
-  String description = '';
-  int price = 0;
-  int quantity = 0;
+class Item {
+  Product product = Product();
+  int quantity = 1;
 
-  OrderItem(this.id, this.description, this.price) {
-    quantity = 1;
+  Item();
+
+  factory Item.from(Product product) {
+    var item = Item()..product = product;
+    return item;
   }
 
-  factory OrderItem.from(Product product) {
-    return OrderItem(product.id, product.description, product.price);
+  factory Item.fromData(
+      String id, String description, int price, int quantity) {
+    var product = Product.fromData(id, description, price);
+    var item = Item()
+      ..product = product
+      ..quantity = quantity;
+
+    return item;
   }
 
   increaseQuantity() {
@@ -33,7 +40,7 @@ class Order {
   String id = '';
   Client client = Client();
   Address address = Address();
-  Map<String, OrderItem> items = {};
+  Map<String, Item> items = {};
   Payment payment = Payment();
   DateTime datetime = DateTime.now();
 
@@ -42,7 +49,7 @@ class Order {
       return _increaseItemQuantity(product.id);
     }
 
-    items[product.id] = OrderItem.from(product);
+    items[product.id] = Item.from(product);
   }
 
   remove(String id) {
@@ -50,8 +57,8 @@ class Order {
   }
 
   int get total {
-    return items.values
-        .fold(0, (int total, item) => total + item.price * item.quantity);
+    return items.values.fold(
+        0, (int total, item) => total + item.product.price * item.quantity);
   }
 
   _increaseItemQuantity(String id) {

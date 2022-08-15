@@ -267,8 +267,8 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text('${item.value.quantity}'),
-            Text(item.value.description),
-            Currency(value: item.value.quantity * item.value.price),
+            Text(item.value.product.description),
+            Currency(value: item.value.quantity * item.value.product.price),
           ],
         ),
       );
@@ -295,7 +295,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
 
     for (var item in widget.order.items.entries) {
       ticket +=
-          "[L]${item.value.quantity}x ${item.value.description} [R]R\$${item.value.quantity * item.value.price},00\n";
+          "[L]${item.value.quantity}x ${item.value.product.description} [R]R\$${item.value.quantity * item.value.product.price},00\n";
     }
 
     ticket += "\n" +
@@ -320,7 +320,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
 
     for (var item in widget.order.items.entries) {
       message +=
-          "```${item.value.quantity}x ${item.value.description} R\$${item.value.quantity * item.value.price},00```\n";
+          "```${item.value.quantity}x ${item.value.product.description} R\$${item.value.quantity * item.value.product.price},00```\n";
     }
     message += "\n" +
         "```Total R\$${widget.order.total},00```\n\n" +
