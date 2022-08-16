@@ -150,13 +150,16 @@ class _SearchClientDelegate extends SearchDelegate {
         shrinkWrap: true,
         itemCount: results.length,
         itemBuilder: (context, index) => ListTile(
-          leading: const Icon(Icons.person),
+          contentPadding:
+              const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+          leading: Container(
+              height: double.infinity, child: const Icon(Icons.person)),
           title: Text(results[index].name),
           subtitle: Text(results[index].address.description,
               overflow: TextOverflow.ellipsis),
           onTap: () => close(context, results[index]),
         ),
-        separatorBuilder: (context, index) => const Divider(),
+        separatorBuilder: (context, index) => const Divider(height: 0.0),
       ),
     );
   }
@@ -174,13 +177,16 @@ class _SearchClientDelegate extends SearchDelegate {
         shrinkWrap: true,
         itemCount: suggestions.length,
         itemBuilder: (context, index) => ListTile(
-          leading: const Icon(Icons.person),
+          contentPadding:
+              const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+          leading: Container(
+              height: double.infinity, child: const Icon(Icons.person)),
           title: Text(suggestions[index].name),
           subtitle: Text(suggestions[index].address.description,
               overflow: TextOverflow.ellipsis),
           onTap: () => close(context, suggestions[index]),
         ),
-        separatorBuilder: (context, index) => const Divider(),
+        separatorBuilder: (context, index) => const Divider(height: 0.0),
       ),
     );
   }
