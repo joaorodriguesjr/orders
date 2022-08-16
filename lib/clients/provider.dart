@@ -19,7 +19,7 @@ class ClientsProvider extends ChangeNotifier {
   }
 
   Stream<List<Client>> _stream() {
-    return _collection.snapshots().map(_mapSnapshot);
+    return _collection.orderBy('name').snapshots().map(_mapSnapshot);
   }
 
   List<Client> _mapSnapshot(QuerySnapshot snapshot) {
