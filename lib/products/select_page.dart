@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:orders/products/provider.dart';
-import 'package:orders/shared/currency.dart';
+import 'package:delivery/products/provider.dart';
+import 'package:delivery/shared/currency.dart';
 import 'package:provider/provider.dart';
 
 class SelectProductPage extends StatefulWidget {

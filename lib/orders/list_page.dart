@@ -2,10 +2,10 @@ import 'package:android_intent_plus/android_intent.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
-import 'package:orders/orders/create_page.dart';
-import 'package:orders/orders/details_page.dart';
-import 'package:orders/orders/provider.dart';
-import 'package:orders/shared/currency.dart';
+import 'package:delivery/orders/create_page.dart';
+import 'package:delivery/orders/details_page.dart';
+import 'package:delivery/orders/provider.dart';
+import 'package:delivery/shared/currency.dart';
 import 'package:provider/provider.dart';
 
 class ListOrdersPage extends StatefulWidget {

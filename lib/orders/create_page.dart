@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:orders/clients/select_page.dart';
-import 'package:orders/clients/model.dart';
-import 'package:orders/orders/model.dart';
-import 'package:orders/orders/provider.dart';
-import 'package:orders/products/select_page.dart';
+import 'package:delivery/clients/select_page.dart';
+import 'package:delivery/clients/model.dart';
+import 'package:delivery/orders/model.dart';
+import 'package:delivery/orders/provider.dart';
+import 'package:delivery/products/select_page.dart';
 import 'package:provider/provider.dart';
 
 class CreateOrderPage extends StatefulWidget {
