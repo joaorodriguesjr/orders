@@ -93,6 +93,38 @@ class OrdersProvider extends ChangeNotifier {
     await FirebaseFirestore.instance.collection('orders').add(data);
   }
 
+  Future<void> updateOrder(Order order) async {
+    var data = {
+      'client': {
+        'id': order.client.id,
+        'name': order.client.name,
+        'phone': order.client.phone,
+      },
+      'address': {
+        'description': order.address.description,
+        'complement': order.address.complement,
+      },
+      'datetime': order.datetime.toUtc(),
+      'items': {
+        for (var item in order.items.values)
+          item.product.id: {
+            'description': item.product.description,
+            'price': item.product.price,
+            'quantity': item.quantity,
+          }
+      },
+      'payment': {
+        'kind': order.payment.kind,
+        'status': order.payment.status,
+      },
+    };
+
+    await FirebaseFirestore.instance
+        .collection('orders')
+        .doc(order.id)
+        .set(data);
+  }
+
   void deleteOrder(Order order) {
     FirebaseFirestore.instance.collection('orders').doc(order.id).delete().then(
         (_) => _updateOrders(orders.where((o) => o.id != order.id).toList()));
