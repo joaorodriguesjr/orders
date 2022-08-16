@@ -56,14 +56,54 @@ class _SelectClientPageState extends State<SelectClientPage> {
       return ListView.separated(
         shrinkWrap: true,
         itemCount: clients.length,
-        itemBuilder: (context, index) => ListTile(
-          leading: const Icon(Icons.person),
-          title: Text(clients[index].name),
-          subtitle: Text(clients[index].address.description,
-              overflow: TextOverflow.ellipsis),
-          onTap: () => Navigator.pop(context, clients[index]),
+        itemBuilder: (context, index) => Dismissible(
+          key: Key(clients[index].id),
+          direction: DismissDirection.startToEnd,
+          background: Container(
+            color: Theme.of(context).primaryColor,
+            child: const ListTile(
+              iconColor: Colors.white,
+              textColor: Colors.white,
+              contentPadding:
+                  EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0),
+              leading: Icon(Icons.delete),
+            ),
+          ),
+          onDismissed: (direction) async {
+            await provider.deleteClient(clients[index]);
+          },
+          confirmDismiss: (direction) async {
+            final result = await showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                title: const Text('Excluir Cliente'),
+                content: const Text('Confirmar a exclusão permanente?'),
+                actions: [
+                  TextButton(
+                    child: const Text('Não'),
+                    onPressed: () => Navigator.of(context).pop(false),
+                  ),
+                  TextButton(
+                    child: const Text('Sim'),
+                    onPressed: () => Navigator.of(context).pop(true),
+                  ),
+                ],
+              ),
+            );
+            return result;
+          },
+          child: ListTile(
+            contentPadding:
+                const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+            leading: Container(
+                height: double.infinity, child: const Icon(Icons.person)),
+            title: Text(clients[index].name),
+            subtitle: Text(clients[index].address.description,
+                overflow: TextOverflow.ellipsis),
+            onTap: () => Navigator.pop(context, clients[index]),
+          ),
         ),
-        separatorBuilder: (context, index) => const Divider(),
+        separatorBuilder: (context, index) => const Divider(height: 0.0),
       );
     });
   }

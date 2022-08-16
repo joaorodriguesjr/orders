@@ -56,4 +56,11 @@ class ClientsProvider extends ChangeNotifier {
 
     notifyListeners();
   }
+
+  deleteClient(Client client) async {
+    await FirebaseFirestore.instance
+        .collection('clients')
+        .doc(client.id)
+        .delete();
+  }
 }
