@@ -50,7 +50,14 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
             mainAxisSize: MainAxisSize.min,
             children: [
               const Padding(padding: EdgeInsets.all(8)),
-              _clientSelection(),
+              _ClientSelection(
+                client: _client,
+                onClientChange: (Client client) {
+                  setState(() {
+                    _client = client;
+                  });
+                },
+              ),
               const Padding(padding: EdgeInsets.all(8), child: Divider()),
               ListTile(
                 title: const Text('Items do Pedido'),
@@ -207,13 +214,26 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
     );
   }
 
-  bool get _isValid => _client.id.isNotEmpty && _order.items.isNotEmpty;
+  bool get _isValid {
+    return _client.id.isNotEmpty && _order.items.isNotEmpty;
+  }
+}
 
-  Widget _clientSelection() {
+class _ClientSelection extends StatelessWidget {
+  final Client client;
+
+  final Function(Client client) onClientChange;
+
+  const _ClientSelection(
+      {Key? key, required this.client, required this.onClientChange})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return ListTile(
-      title: Text(_client.name),
-      subtitle: (_client.address.description != '')
-          ? Text(_client.address.description)
+      title: Text(client.name),
+      subtitle: (client.address.description.isNotEmpty)
+          ? Text(client.address.description)
           : null,
       leading: const Icon(Icons.person),
       trailing: IconButton(
@@ -230,7 +250,7 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
             return;
           }
 
-          setState(() => _client = client);
+          onClientChange(client);
         },
       ),
     );
