@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:delivery/clients/create_page.dart';
 import 'package:delivery/clients/provider.dart';
+import 'package:delivery/clients/model.dart';
 import 'package:provider/provider.dart';
 
 class SelectClientPage extends StatefulWidget {
@@ -139,35 +140,34 @@ class _SearchClientDelegate extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    var provider = Provider.of<ClientsProvider>(context);
-    var results = provider.clients
-        .where((client) => client.name.toLowerCase().contains(query))
-        .toList();
-
-    return Card(
-      margin: const EdgeInsets.all(8),
-      child: ListView.separated(
-        shrinkWrap: true,
-        itemCount: results.length,
-        itemBuilder: (context, index) => ListTile(
-          contentPadding:
-              const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-          leading: Container(
-              height: double.infinity, child: const Icon(Icons.person)),
-          title: Text(results[index].name),
-          subtitle: Text(results[index].address.description,
-              overflow: TextOverflow.ellipsis),
-          onTap: () => close(context, results[index]),
-        ),
-        separatorBuilder: (context, index) => const Divider(height: 0.0),
-      ),
+    return _SearchClientsList(
+      query: query,
+      onClientTap: (client) => close(context, client),
     );
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
+    return _SearchClientsList(
+      query: query,
+      onClientTap: (client) => close(context, client),
+    );
+  }
+}
+
+class _SearchClientsList extends StatelessWidget {
+  final String query;
+
+  final Function(Client) onClientTap;
+
+  const _SearchClientsList(
+      {Key? key, required this.query, required this.onClientTap})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     var provider = Provider.of<ClientsProvider>(context);
-    var suggestions = provider.clients
+    var filtered = provider.clients
         .where((client) => client.name.toLowerCase().contains(query))
         .toList();
 
@@ -175,16 +175,16 @@ class _SearchClientDelegate extends SearchDelegate {
       margin: const EdgeInsets.all(8),
       child: ListView.separated(
         shrinkWrap: true,
-        itemCount: suggestions.length,
+        itemCount: filtered.length,
         itemBuilder: (context, index) => ListTile(
           contentPadding:
               const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
           leading: Container(
               height: double.infinity, child: const Icon(Icons.person)),
-          title: Text(suggestions[index].name),
-          subtitle: Text(suggestions[index].address.description,
+          title: Text(filtered[index].name),
+          subtitle: Text(filtered[index].address.description,
               overflow: TextOverflow.ellipsis),
-          onTap: () => close(context, suggestions[index]),
+          onTap: () => onClientTap(filtered[index]),
         ),
         separatorBuilder: (context, index) => const Divider(height: 0.0),
       ),
