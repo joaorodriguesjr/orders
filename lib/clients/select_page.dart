@@ -25,6 +25,8 @@ class _SelectClientPageState extends State<SelectClientPage> {
               var client = await showSearch(
                   context: context, delegate: _SearchClientDelegate());
 
+              if (client == null) return;
+
               navigator.pop(client);
             },
           ),
@@ -111,12 +113,15 @@ class _SelectClientPageState extends State<SelectClientPage> {
 
 class _SearchClientDelegate extends SearchDelegate {
   @override
+  String get searchFieldLabel => 'Buscar';
+
+  @override
   List<Widget> buildActions(BuildContext context) {
     return [
       IconButton(
         icon: const Icon(Icons.clear),
         onPressed: () {
-          query = '';
+          (query.isEmpty) ? close(context, null) : query = '';
         },
       ),
     ];
@@ -134,7 +139,26 @@ class _SearchClientDelegate extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    return const Center();
+    var provider = Provider.of<ClientsProvider>(context);
+    var results = provider.clients
+        .where((client) => client.name.toLowerCase().contains(query))
+        .toList();
+
+    return Card(
+      margin: const EdgeInsets.all(8),
+      child: ListView.separated(
+        shrinkWrap: true,
+        itemCount: results.length,
+        itemBuilder: (context, index) => ListTile(
+          leading: const Icon(Icons.person),
+          title: Text(results[index].name),
+          subtitle: Text(results[index].address.description,
+              overflow: TextOverflow.ellipsis),
+          onTap: () => close(context, results[index]),
+        ),
+        separatorBuilder: (context, index) => const Divider(),
+      ),
+    );
   }
 
   @override
