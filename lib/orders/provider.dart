@@ -37,18 +37,19 @@ class OrdersProvider extends ChangeNotifier {
   }
 
   Order _orderFromDocument(DocumentSnapshot doc) {
+    var data = doc.data() as Map<String, dynamic>;
     var order = Order()
       ..id = doc.id
-      ..client.id = doc.get('client')['id']
-      ..client.name = doc.get('client')['name']
-      ..client.phone = doc.get('client')['phone']
-      ..address.description = doc.get('address')['description']
-      ..address.complement = doc.get('address')['complement']
-      ..payment.kind = doc.get('payment')['kind']
-      ..payment.status = doc.get('payment')['status']
-      ..datetime = doc.get('datetime').toDate();
+      ..client.id = data['client']['id']
+      ..client.name = data['client']['name']
+      ..client.phone = data['client']['phone']
+      ..address.description = data['address']['description']
+      ..address.complement = data['address']['complement']
+      ..payment.kind = data['payment']['kind']
+      ..payment.status = data['payment']['status']
+      ..datetime = data['datetime'].toDate();
 
-    doc.get('items').forEach((key, value) {
+    data['items'].forEach((key, value) {
       order.items[key] = Item.fromData(
           key, value['description'], value['price'], value['quantity']);
     });
