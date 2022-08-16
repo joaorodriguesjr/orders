@@ -7,6 +7,8 @@ import 'package:delivery/clients/model.dart';
 class ClientsProvider extends ChangeNotifier {
   List<Client> clients = [];
 
+  final _collection = FirebaseFirestore.instance.collection('clients');
+
   ClientsProvider() {
     _stream().listen(_updateClients);
   }
@@ -17,11 +19,7 @@ class ClientsProvider extends ChangeNotifier {
   }
 
   Stream<List<Client>> _stream() {
-    return FirebaseFirestore.instance
-        .collection('clients')
-        .orderBy('name')
-        .snapshots()
-        .map(_mapSnapshot);
+    return _collection.snapshots().map(_mapSnapshot);
   }
 
   List<Client> _mapSnapshot(QuerySnapshot snapshot) {
@@ -56,9 +54,6 @@ class ClientsProvider extends ChangeNotifier {
   }
 
   deleteClient(Client client) async {
-    await FirebaseFirestore.instance
-        .collection('clients')
-        .doc(client.id)
-        .delete();
+    await _collection.doc(client.id).delete();
   }
 }
