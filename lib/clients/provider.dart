@@ -7,10 +7,8 @@ import 'package:delivery/clients/model.dart';
 class ClientsProvider extends ChangeNotifier {
   List<Client> clients = [];
 
-  late StreamSubscription<List<Client>> _subscription;
-
   ClientsProvider() {
-    _subscription = _stream().listen(_updateClients);
+    _stream().listen(_updateClients);
   }
 
   _updateClients(List<Client> clients) {
