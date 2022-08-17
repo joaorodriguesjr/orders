@@ -236,7 +236,7 @@ class _ClientSelection extends StatelessWidget {
       subtitle: (client.address.description.isNotEmpty)
           ? Text(client.address.description)
           : null,
-      leading: const Icon(Icons.person),
+      leading: const Icon(Icons.person_outline),
       trailing: IconButton(
         icon: Icon(Icons.add_circle_outline,
             color: Theme.of(context).primaryColor),

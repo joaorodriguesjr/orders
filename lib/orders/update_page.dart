@@ -210,7 +210,7 @@ class _UpdateOrderPageState extends State<UpdateOrderPage> {
       subtitle: (_order.address.description != '')
           ? Text(_order.address.description)
           : null,
-      leading: const Icon(Icons.person),
+      leading: const Icon(Icons.person_outline),
     );
   }
 }
