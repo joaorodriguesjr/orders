@@ -27,7 +27,9 @@ class FirestoreClients implements ClientsDataSource {
   Future<void> updateClient(Client client) async {}
 
   @override
-  Future<void> deleteClient(Client client) async {}
+  Future<void> deleteClient(Client client) async {
+    await collection.doc(client.id).delete();
+  }
 }
 
 List<Client> clientsFromSnapshot(QuerySnapshot snapshot) {

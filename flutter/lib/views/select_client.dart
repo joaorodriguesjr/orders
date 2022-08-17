@@ -76,7 +76,7 @@ class _ClientsList extends StatelessWidget {
             ),
           ),
           onDismissed: (direction) async {
-            // FIXME: await controller.deleteClient(client);
+            await controller.deleteClient(client);
           },
           confirmDismiss: (direction) async {
             final result = await showDialog(

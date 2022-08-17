@@ -18,4 +18,8 @@ class ClientsController extends ChangeNotifier {
   registerClient(Client client) async {
     await dataSource.createClient(client);
   }
+
+  deleteClient(Client client) async {
+    await dataSource.deleteClient(client);
+  }
 }
