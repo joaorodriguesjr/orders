@@ -5,8 +5,8 @@ import 'package:delivery/clients.dart';
 import 'create_client.dart';
 import '../controllers.dart';
 
-class SelectClientPage extends StatelessWidget {
-  const SelectClientPage({Key? key}) : super(key: key);
+class SelectClientView extends StatelessWidget {
+  const SelectClientView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class SelectClientPage extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           final client = await navigator.push(
-            MaterialPageRoute(builder: (context) => const CreateClientPage()),
+            MaterialPageRoute(builder: (context) => const CreateClientView()),
           );
 
           if (client == null) return;

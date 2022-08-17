@@ -4,8 +4,8 @@ import 'package:provider/provider.dart';
 import '../shared/currency.dart';
 import '../controllers.dart';
 
-class SelectProductPage extends StatelessWidget {
-  const SelectProductPage({Key? key}) : super(key: key);
+class SelectProductView extends StatelessWidget {
+  const SelectProductView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

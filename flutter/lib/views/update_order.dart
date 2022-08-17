@@ -5,16 +5,16 @@ import 'package:delivery/orders.dart';
 import '../controllers.dart';
 import 'select_product.dart';
 
-class UpdateOrderPage extends StatefulWidget {
+class UpdateOrderView extends StatefulWidget {
   final Order order;
 
-  const UpdateOrderPage({Key? key, required this.order}) : super(key: key);
+  const UpdateOrderView({Key? key, required this.order}) : super(key: key);
 
   @override
-  State<UpdateOrderPage> createState() => _UpdateOrderPageState();
+  State<UpdateOrderView> createState() => _UpdateOrderPageState();
 }
 
-class _UpdateOrderPageState extends State<UpdateOrderPage> {
+class _UpdateOrderPageState extends State<UpdateOrderView> {
   late final Order _order = widget.order;
 
   @override
@@ -55,7 +55,7 @@ class _UpdateOrderPageState extends State<UpdateOrderPage> {
                     var item = await Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const SelectProductPage(),
+                        builder: (context) => const SelectProductView(),
                       ),
                     );
 

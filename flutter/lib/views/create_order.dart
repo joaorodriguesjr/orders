@@ -7,16 +7,16 @@ import '../controllers.dart';
 import 'select_client.dart';
 import 'select_product.dart';
 
-class CreateOrderPage extends StatefulWidget {
+class CreateOrderView extends StatefulWidget {
   final DateTime date;
 
-  const CreateOrderPage({Key? key, required this.date}) : super(key: key);
+  const CreateOrderView({Key? key, required this.date}) : super(key: key);
 
   @override
-  State<CreateOrderPage> createState() => _CreateOrderPageState();
+  State<CreateOrderView> createState() => _CreateOrderPageState();
 }
 
-class _CreateOrderPageState extends State<CreateOrderPage> {
+class _CreateOrderPageState extends State<CreateOrderView> {
   var _client = Client()..name = 'Cliente';
 
   final _order = Order()
@@ -70,7 +70,7 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
                     var item = await Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const SelectProductPage(),
+                        builder: (context) => const SelectProductView(),
                       ),
                     );
 
@@ -247,7 +247,7 @@ class _ClientSelection extends StatelessWidget {
           var client = await Navigator.push<Client>(
             context,
             MaterialPageRoute(
-              builder: (context) => const SelectClientPage(),
+              builder: (context) => const SelectClientView(),
             ),
           );
 

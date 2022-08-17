@@ -10,15 +10,15 @@ import 'update_order.dart';
 import '../shared/currency.dart';
 import '../controllers.dart';
 
-class OrderDetailsPage extends StatefulWidget {
+class OrderDetailsView extends StatefulWidget {
   final Order order;
-  const OrderDetailsPage({Key? key, required this.order}) : super(key: key);
+  const OrderDetailsView({Key? key, required this.order}) : super(key: key);
 
   @override
-  State<OrderDetailsPage> createState() => _OrderDetailsPageState();
+  State<OrderDetailsView> createState() => _OrderDetailsPageState();
 }
 
-class _OrderDetailsPageState extends State<OrderDetailsPage> {
+class _OrderDetailsPageState extends State<OrderDetailsView> {
   static const printer = MethodChannel('delivery.printer');
 
   @override
@@ -207,7 +207,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                             context,
                             MaterialPageRoute(
                               builder: (context) =>
-                                  UpdateOrderPage(order: order),
+                                  UpdateOrderView(order: order),
                             ),
                           );
 

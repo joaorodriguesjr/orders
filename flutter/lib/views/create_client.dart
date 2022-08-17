@@ -4,14 +4,14 @@ import 'package:delivery/clients.dart';
 
 import '../controllers.dart';
 
-class CreateClientPage extends StatefulWidget {
-  const CreateClientPage({Key? key}) : super(key: key);
+class CreateClientView extends StatefulWidget {
+  const CreateClientView({Key? key}) : super(key: key);
 
   @override
-  State<CreateClientPage> createState() => _CreateClientPageState();
+  State<CreateClientView> createState() => _CreateClientPageState();
 }
 
-class _CreateClientPageState extends State<CreateClientPage> {
+class _CreateClientPageState extends State<CreateClientView> {
   final _formKey = GlobalKey<FormState>();
 
   final _client = Client();

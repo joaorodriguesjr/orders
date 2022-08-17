@@ -10,14 +10,14 @@ import 'order_details.dart';
 import '../shared/currency.dart';
 import '../controllers.dart';
 
-class ListOrdersPage extends StatefulWidget {
-  const ListOrdersPage({Key? key}) : super(key: key);
+class ListOrdersView extends StatefulWidget {
+  const ListOrdersView({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => ListOrdersPageState();
 }
 
-class ListOrdersPageState extends State<ListOrdersPage> {
+class ListOrdersPageState extends State<ListOrdersView> {
   @override
   Widget build(BuildContext context) {
     var controller = Provider.of<OrdersController>(context);
@@ -107,7 +107,7 @@ class ListOrdersPageState extends State<ListOrdersPage> {
             context,
             MaterialPageRoute(
                 builder: (context) =>
-                    CreateOrderPage(date: controller.ordersDay)),
+                    CreateOrderView(date: controller.ordersDay)),
           );
         },
         tooltip: 'Adicionar pedido',
@@ -137,7 +137,7 @@ class ListOrdersPageState extends State<ListOrdersPage> {
                 context,
                 MaterialPageRoute(
                   builder: (context) =>
-                      OrderDetailsPage(order: provider.orders[index]),
+                      OrderDetailsView(order: provider.orders[index]),
                 ),
               );
             },
