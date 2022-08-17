@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:app/pages/create_client.dart';
-import 'package:app/clients/provider.dart';
-import 'package:delivery/clients.dart';
 import 'package:provider/provider.dart';
+import 'package:delivery/clients.dart';
 
-class SelectClientPage extends StatefulWidget {
+import 'create_client.dart';
+import '../controllers.dart';
+
+class SelectClientPage extends StatelessWidget {
   const SelectClientPage({Key? key}) : super(key: key);
 
-  @override
-  State<SelectClientPage> createState() => _SelectClientPageState();
-}
-
-class _SelectClientPageState extends State<SelectClientPage> {
   @override
   Widget build(BuildContext context) {
     var navigator = Navigator.of(context);
@@ -33,9 +29,9 @@ class _SelectClientPageState extends State<SelectClientPage> {
           ),
         ],
       ),
-      body: Card(
-        margin: const EdgeInsets.all(8),
-        child: _clients(),
+      body: const Card(
+        margin: EdgeInsets.all(8),
+        child: _ClientsList(),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
@@ -51,16 +47,23 @@ class _SelectClientPageState extends State<SelectClientPage> {
       ),
     );
   }
+}
 
-  Widget _clients() {
-    return Consumer<ClientsProvider>(builder: (context, provider, _) {
-      var clients = provider.clients;
+class _ClientsList extends StatelessWidget {
+  const _ClientsList({Key? key}) : super(key: key);
 
-      return ListView.separated(
-        shrinkWrap: true,
-        itemCount: clients.length,
-        itemBuilder: (context, index) => Dismissible(
-          key: Key(clients[index].id),
+  @override
+  Widget build(BuildContext context) {
+    var controller = Provider.of<ClientsController>(context);
+
+    return ListView.separated(
+      shrinkWrap: true,
+      itemCount: controller.clients.length,
+      itemBuilder: (context, index) {
+        var client = controller.clients[index];
+
+        return Dismissible(
+          key: Key(client.id),
           direction: DismissDirection.startToEnd,
           background: Container(
             color: Theme.of(context).primaryColor,
@@ -73,7 +76,7 @@ class _SelectClientPageState extends State<SelectClientPage> {
             ),
           ),
           onDismissed: (direction) async {
-            await provider.deleteClient(clients[index]);
+            // FIXME: await controller.deleteClient(client);
           },
           confirmDismiss: (direction) async {
             final result = await showDialog(
@@ -100,15 +103,15 @@ class _SelectClientPageState extends State<SelectClientPage> {
                 const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
             leading: Container(
                 height: double.infinity, child: const Icon(Icons.person)),
-            title: Text(clients[index].name),
-            subtitle: Text(clients[index].address.description,
+            title: Text(client.name),
+            subtitle: Text(client.address.description,
                 overflow: TextOverflow.ellipsis),
-            onTap: () => Navigator.pop(context, clients[index]),
+            onTap: () => Navigator.pop(context, client),
           ),
-        ),
-        separatorBuilder: (context, index) => const Divider(height: 0.0),
-      );
-    });
+        );
+      },
+      separatorBuilder: (context, index) => const Divider(height: 0.0),
+    );
   }
 }
 
@@ -166,8 +169,8 @@ class _SearchClientsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var provider = Provider.of<ClientsProvider>(context);
-    var filtered = provider.clients
+    var controller = Provider.of<ClientsController>(context);
+    var filtered = controller.clients
         .where((client) => client.name.toLowerCase().contains(query))
         .toList();
 

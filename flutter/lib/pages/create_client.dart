@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:delivery/clients.dart';
-import 'package:app/clients/provider.dart';
 import 'package:provider/provider.dart';
+import 'package:delivery/clients.dart';
+
+import '../controllers.dart';
 
 class CreateClientPage extends StatefulWidget {
   const CreateClientPage({Key? key}) : super(key: key);
@@ -100,9 +101,10 @@ class _CreateClientPageState extends State<CreateClientPage> {
                           }
 
                           form.save();
-                          var provider = Provider.of<ClientsProvider>(context,
+                          var controller = Provider.of<ClientsController>(
+                              context,
                               listen: false);
-                          provider.registerClient(_client);
+                          await controller.registerClient(_client);
                           navigator.pop(_client);
                         },
                         child: const Text('SALVAR'),
