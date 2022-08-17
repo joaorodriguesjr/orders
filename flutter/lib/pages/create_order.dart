@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:app/pages/select_client.dart';
 import 'package:delivery/clients.dart';
 import 'package:delivery/orders.dart';
-import 'package:app/orders/provider.dart';
-import 'package:app/pages/select_product.dart';
 import 'package:provider/provider.dart';
+
+import '../controllers.dart';
+import 'select_client.dart';
+import 'select_product.dart';
 
 class CreateOrderPage extends StatefulWidget {
   final DateTime date;
@@ -25,7 +26,7 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
   @override
   Widget build(BuildContext context) {
     var navigator = Navigator.of(context);
-    var provider = Provider.of<OrdersProvider>(context, listen: false);
+    var controller = Provider.of<OrdersController>(context, listen: false);
 
     return Scaffold(
       appBar: AppBar(
@@ -55,6 +56,7 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
                 onClientChange: (Client client) {
                   setState(() {
                     _client = client;
+                    _order.client = client;
                   });
                 },
               ),
@@ -200,7 +202,7 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
                   TextButton(
                     onPressed: (_isValid)
                         ? () async {
-                            await provider.registerOrder(_order, _client);
+                            await controller.registerOrder(_order);
                             navigator.pop();
                           }
                         : null,

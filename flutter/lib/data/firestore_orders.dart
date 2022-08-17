@@ -20,10 +20,14 @@ class FirestoreOrders implements OrdersDataSource {
   }
 
   @override
-  Future<void> updateOrder(Order order) async {}
+  Future<void> updateOrder(Order order) async {
+    await collection.doc(order.id).update(orderToMap(order));
+  }
 
   @override
-  Future<void> deleteOrder(Order order) async {}
+  Future<void> deleteOrder(Order order) async {
+    await collection.doc(order.id).delete();
+  }
 }
 
 List<Order> ordersFromSnapshot(QuerySnapshot snapshot) {

@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
-import 'package:app/pages/create_order.dart';
-import 'package:app/pages/order_details.dart';
-import 'package:app/orders/provider.dart';
-import 'package:app/shared/currency.dart';
 import 'package:provider/provider.dart';
+
+import 'create_order.dart';
+import 'order_details.dart';
+import '../shared/currency.dart';
+import '../controllers.dart';
 
 class ListOrdersPage extends StatefulWidget {
   const ListOrdersPage({Key? key}) : super(key: key);
@@ -19,11 +20,11 @@ class ListOrdersPage extends StatefulWidget {
 class ListOrdersPageState extends State<ListOrdersPage> {
   @override
   Widget build(BuildContext context) {
-    var ordersProvider = Provider.of<OrdersProvider>(context);
+    var controller = Provider.of<OrdersController>(context);
 
     String format() {
       initializeDateFormatting('pt_BR', null);
-      return DateFormat.MMMMEEEEd('pt_BR').format(ordersProvider.date);
+      return DateFormat.MMMMEEEEd('pt_BR').format(controller.ordersDay);
     }
 
     return Scaffold(
@@ -39,15 +40,15 @@ class ListOrdersPageState extends State<ListOrdersPage> {
             onPressed: () async {
               final date = await showDatePicker(
                 context: context,
-                initialDate: ordersProvider.date,
+                initialDate: controller.ordersDay,
                 firstDate:
-                    ordersProvider.date.subtract(const Duration(days: 365)),
-                lastDate: ordersProvider.date.add(const Duration(days: 365)),
+                    controller.ordersDay.subtract(const Duration(days: 365)),
+                lastDate: controller.ordersDay.add(const Duration(days: 365)),
               );
 
               if (date == null) return;
 
-              ordersProvider.changeDate(date);
+              controller.changeOrdersDay(date);
             },
           ),
           PopupMenuButton(
@@ -59,11 +60,11 @@ class ListOrdersPageState extends State<ListOrdersPage> {
                       leading: const Icon(Icons.location_on),
                       title: const Text('Gerar rota'),
                       onTap: () {
-                        var addresses =
-                            Provider.of<OrdersProvider>(context, listen: false)
-                                .orders
-                                .map((order) => order.address.description)
-                                .toList();
+                        var addresses = Provider.of<OrdersController>(context,
+                                listen: false)
+                            .orders
+                            .map((order) => order.address.description)
+                            .toList();
 
                         var route = '?daddr=';
 
@@ -106,7 +107,7 @@ class ListOrdersPageState extends State<ListOrdersPage> {
             context,
             MaterialPageRoute(
                 builder: (context) =>
-                    CreateOrderPage(date: ordersProvider.date)),
+                    CreateOrderPage(date: controller.ordersDay)),
           );
         },
         tooltip: 'Adicionar pedido',
@@ -116,7 +117,7 @@ class ListOrdersPageState extends State<ListOrdersPage> {
   }
 
   Widget _orders() {
-    return Consumer<OrdersProvider>(builder: (context, provider, child) {
+    return Consumer<OrdersController>(builder: (context, provider, child) {
       return ListView.separated(
         shrinkWrap: true,
         primary: false,

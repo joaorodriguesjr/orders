@@ -28,6 +28,14 @@ class OrdersController extends ChangeNotifier {
     await _dataSource.createOrder(order);
   }
 
+  updateOrder(Order order) async {
+    await _dataSource.updateOrder(order);
+  }
+
+  deleteOrder(Order order) async {
+    await _dataSource.deleteOrder(order);
+  }
+
   changeOrdersDay(DateTime day) async {
     _ordersDay = day;
 

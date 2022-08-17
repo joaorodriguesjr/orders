@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
-import 'package:app/pages/update_order.dart';
 import 'package:delivery/orders.dart';
-import 'package:app/shared/currency.dart';
-import 'package:app/orders/provider.dart';
 import 'package:provider/provider.dart';
+
+import 'update_order.dart';
+import '../shared/currency.dart';
+import '../controllers.dart';
 
 class OrderDetailsPage extends StatefulWidget {
   final Order order;
@@ -236,7 +237,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                                 TextButton(
                                   child: const Text('Excluir'),
                                   onPressed: () {
-                                    Provider.of<OrdersProvider>(context,
+                                    Provider.of<OrdersController>(context,
                                             listen: false)
                                         .deleteOrder(order);
                                     Navigator.pop(context, true);

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:delivery/orders.dart';
-import 'package:app/orders/provider.dart';
-import 'package:app/pages/select_product.dart';
 import 'package:provider/provider.dart';
+import 'package:delivery/orders.dart';
+
+import '../controllers.dart';
+import 'select_product.dart';
 
 class UpdateOrderPage extends StatefulWidget {
   final Order order;
@@ -19,7 +20,7 @@ class _UpdateOrderPageState extends State<UpdateOrderPage> {
   @override
   Widget build(BuildContext context) {
     var navigator = Navigator.of(context);
-    var provider = Provider.of<OrdersProvider>(context, listen: false);
+    var controller = Provider.of<OrdersController>(context, listen: false);
 
     return Scaffold(
       appBar: AppBar(
@@ -187,7 +188,7 @@ class _UpdateOrderPageState extends State<UpdateOrderPage> {
                   TextButton(
                     onPressed: (_isValid)
                         ? () async {
-                            await provider.updateOrder(_order);
+                            await controller.updateOrder(_order);
                             navigator.pop(_order);
                           }
                         : null,
