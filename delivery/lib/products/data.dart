@@ -1,6 +1,6 @@
 import 'models.dart';
 
-abstract class OrdersDataSource {
+abstract class ProductsDataSource {
   Stream<List<Product>> all();
 
   Future<void> createProduct(Product product);

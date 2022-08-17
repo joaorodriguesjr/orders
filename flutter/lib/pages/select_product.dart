@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:app/products/provider.dart';
-import 'package:app/shared/currency.dart';
 import 'package:provider/provider.dart';
 
-class SelectProductPage extends StatefulWidget {
+import '../shared/currency.dart';
+import '../controllers.dart';
+
+class SelectProductPage extends StatelessWidget {
   const SelectProductPage({Key? key}) : super(key: key);
 
-  @override
-  State<SelectProductPage> createState() => _SelectProductPageState();
-}
-
-class _SelectProductPageState extends State<SelectProductPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,28 +19,35 @@ class _SelectProductPageState extends State<SelectProductPage> {
           ),
         ],
       ),
-      body: Card(
-        margin: const EdgeInsets.all(8),
-        child: _products(),
+      body: const Card(
+        margin: EdgeInsets.all(8),
+        child: _ProductsList(),
       ),
     );
   }
+}
 
-  Widget _products() {
-    return Consumer<ProductsProvider>(builder: (context, provider, _) {
-      var products = provider.products;
+class _ProductsList extends StatelessWidget {
+  const _ProductsList({Key? key}) : super(key: key);
 
-      return ListView.separated(
-        shrinkWrap: true,
-        itemCount: products.length,
-        itemBuilder: (context, index) => ListTile(
-          title: Text(products[index].description),
+  @override
+  Widget build(BuildContext context) {
+    var controller = Provider.of<ProductsController>(context);
+
+    return ListView.separated(
+      shrinkWrap: true,
+      itemCount: controller.products.length,
+      itemBuilder: (context, index) {
+        var product = controller.products[index];
+
+        return ListTile(
+          title: Text(product.description),
           leading: const Icon(Icons.dinner_dining),
-          trailing: Currency(value: products[index].price),
-          onTap: () => Navigator.pop(context, products[index]),
-        ),
-        separatorBuilder: (context, index) => const Divider(),
-      );
-    });
+          trailing: Currency(value: product.price),
+          onTap: () => Navigator.pop(context, product),
+        );
+      },
+      separatorBuilder: (context, index) => const Divider(),
+    );
   }
 }
