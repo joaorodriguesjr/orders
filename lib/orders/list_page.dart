@@ -1,5 +1,6 @@
 import 'package:android_intent_plus/android_intent.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:delivery/orders/create_page.dart';
@@ -27,10 +28,14 @@ class ListOrdersPageState extends State<ListOrdersPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Lista de Pedidos'),
+        title: const Text('Pedidos'),
+        leading: IconButton(
+          icon: const Icon(Icons.close),
+          onPressed: () => SystemNavigator.pop(),
+        ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.calendar_today),
+            icon: const Icon(Icons.calendar_month_outlined),
             onPressed: () async {
               final date = await showDatePicker(
                 context: context,
@@ -45,7 +50,7 @@ class ListOrdersPageState extends State<ListOrdersPage> {
             },
           ),
           IconButton(
-            icon: const Icon(Icons.map),
+            icon: const Icon(Icons.more_vert),
             onPressed: () {
               var addresses =
                   Provider.of<OrdersProvider>(context, listen: false)
