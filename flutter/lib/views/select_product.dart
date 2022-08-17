@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../shared/currency.dart';
+import '../helpers/currency.dart';
 import '../controllers.dart';
 
 class SelectProductView extends StatelessWidget {

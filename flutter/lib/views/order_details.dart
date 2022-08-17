@@ -7,7 +7,7 @@ import 'package:delivery/orders.dart';
 import 'package:provider/provider.dart';
 
 import 'update_order.dart';
-import '../shared/currency.dart';
+import '../helpers/currency.dart';
 import '../controllers.dart';
 
 class OrderDetailsView extends StatefulWidget {
