@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:app/pages/list_orders.dart';
-import 'package:app/orders/provider.dart';
 import 'package:provider/provider.dart';
+
 import 'firebase_options.dart';
 
+import 'pages/list_orders.dart';
+import 'orders/provider.dart';
 import 'controllers.dart';
-import 'clients/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,8 +32,6 @@ class MyApp extends StatelessWidget {
 
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<ClientsProvider>(
-            create: (_) => ClientsProvider()),
         ChangeNotifierProvider<OrdersProvider>(create: (_) => OrdersProvider()),
         ChangeNotifierProvider<ProductsController>(
             create: (_) => ProductsController(FirestoreProducts())),
