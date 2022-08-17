@@ -40,8 +40,9 @@ class ListOrdersPageState extends State<ListOrdersPage> {
               final date = await showDatePicker(
                 context: context,
                 initialDate: ordersProvider.date,
-                firstDate: DateTime(2020),
-                lastDate: DateTime(2025),
+                firstDate:
+                    ordersProvider.date.subtract(const Duration(days: 365)),
+                lastDate: ordersProvider.date.add(const Duration(days: 365)),
               );
 
               if (date == null) return;
