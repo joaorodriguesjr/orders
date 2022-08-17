@@ -31,7 +31,7 @@ class SelectClientView extends StatelessWidget {
       ),
       body: const Card(
         margin: EdgeInsets.all(8),
-        child: _ClientsList(),
+        child: ClientsList(),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
@@ -49,8 +49,8 @@ class SelectClientView extends StatelessWidget {
   }
 }
 
-class _ClientsList extends StatelessWidget {
-  const _ClientsList({Key? key}) : super(key: key);
+class ClientsList extends StatelessWidget {
+  const ClientsList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -59,58 +59,82 @@ class _ClientsList extends StatelessWidget {
     return ListView.separated(
       shrinkWrap: true,
       itemCount: controller.clients.length,
-      itemBuilder: (context, index) {
-        var client = controller.clients[index];
-
-        return Dismissible(
-          key: Key(client.id),
-          direction: DismissDirection.startToEnd,
-          background: Container(
-            color: Theme.of(context).primaryColor,
-            child: const ListTile(
-              iconColor: Colors.white,
-              textColor: Colors.white,
-              contentPadding:
-                  EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0),
-              leading: Icon(Icons.delete),
-            ),
-          ),
-          onDismissed: (direction) async {
-            await controller.deleteClient(client);
-          },
-          confirmDismiss: (direction) async {
-            final result = await showDialog(
-              context: context,
-              builder: (context) => AlertDialog(
-                title: const Text('Excluir Cliente'),
-                content: const Text('Confirmar a exclusão permanente?'),
-                actions: [
-                  TextButton(
-                    child: const Text('Não'),
-                    onPressed: () => Navigator.of(context).pop(false),
-                  ),
-                  TextButton(
-                    child: const Text('Sim'),
-                    onPressed: () => Navigator.of(context).pop(true),
-                  ),
-                ],
-              ),
-            );
-            return result;
-          },
-          child: ListTile(
-            contentPadding:
-                const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-            leading: Container(
-                height: double.infinity, child: const Icon(Icons.person)),
-            title: Text(client.name),
-            subtitle: Text(client.address.description,
-                overflow: TextOverflow.ellipsis),
-            onTap: () => Navigator.pop(context, client),
-          ),
-        );
-      },
+      itemBuilder: (context, index) =>
+          DismissibleClient(client: controller.clients[index]),
       separatorBuilder: (context, index) => const Divider(height: 0.0),
+    );
+  }
+}
+
+class DismissibleClient extends StatelessWidget {
+  final Client client;
+
+  const DismissibleClient({Key? key, required this.client}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    var controller = Provider.of<ClientsController>(context);
+
+    return Dismissible(
+      key: Key(client.id),
+      direction: DismissDirection.startToEnd,
+      background: Container(
+        color: Theme.of(context).primaryColor,
+        child: const ListTile(
+          iconColor: Colors.white,
+          textColor: Colors.white,
+          contentPadding:
+              EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0),
+          leading: Icon(Icons.delete),
+        ),
+      ),
+      onDismissed: (direction) async {
+        await controller.deleteClient(client);
+      },
+      confirmDismiss: (direction) async {
+        final result = await showDialog(
+          context: context,
+          builder: (context) => ClientExclusionAlert(client: client),
+        );
+        return result;
+      },
+      child: ListTile(
+        contentPadding:
+            const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+        leading:
+            Container(height: double.infinity, child: const Icon(Icons.person)),
+        title: Text(client.name),
+        subtitle:
+            Text(client.address.description, overflow: TextOverflow.ellipsis),
+        onTap: () {
+          Navigator.pop(context, client);
+        },
+      ),
+    );
+  }
+}
+
+class ClientExclusionAlert extends StatelessWidget {
+  final Client client;
+
+  const ClientExclusionAlert({Key? key, required this.client})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text('Excluir Cliente'),
+      content: const Text('Confirmar a exclusão permanente?'),
+      actions: [
+        TextButton(
+          child: const Text('Não'),
+          onPressed: () => Navigator.of(context).pop(false),
+        ),
+        TextButton(
+          child: const Text('Sim'),
+          onPressed: () => Navigator.of(context).pop(true),
+        ),
+      ],
     );
   }
 }
@@ -143,7 +167,7 @@ class _SearchClientDelegate extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    return _SearchClientsList(
+    return SearchClientsList(
       query: query,
       onClientTap: (client) => close(context, client),
     );
@@ -151,19 +175,19 @@ class _SearchClientDelegate extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    return _SearchClientsList(
+    return SearchClientsList(
       query: query,
       onClientTap: (client) => close(context, client),
     );
   }
 }
 
-class _SearchClientsList extends StatelessWidget {
+class SearchClientsList extends StatelessWidget {
   final String query;
 
   final Function(Client) onClientTap;
 
-  const _SearchClientsList(
+  const SearchClientsList(
       {Key? key, required this.query, required this.onClientTap})
       : super(key: key);
 
