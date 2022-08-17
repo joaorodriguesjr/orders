@@ -63,8 +63,8 @@ Map<String, dynamic> orderToMap(Order order) {
       'phone': order.client.phone,
     },
     'address': {
-      'description': order.client.address.description,
-      'complement': order.client.address.complement,
+      'description': order.address.description,
+      'complement': order.address.complement,
     },
     'datetime': order.datetime.toUtc(),
     'items': {

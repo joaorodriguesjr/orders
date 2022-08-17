@@ -57,6 +57,7 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
                   setState(() {
                     _client = client;
                     _order.client = client;
+                    _order.address = client.address;
                   });
                 },
               ),
