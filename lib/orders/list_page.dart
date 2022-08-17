@@ -49,6 +49,38 @@ class ListOrdersPageState extends State<ListOrdersPage> {
               ordersProvider.changeDate(date);
             },
           ),
+          PopupMenuButton(
+              icon: const Icon(Icons.more_vert),
+              itemBuilder: (context) {
+                return [
+                  PopupMenuItem(
+                    child: ListTile(
+                      leading: const Icon(Icons.location_on),
+                      title: const Text('Gerar rota'),
+                      onTap: () {
+                        var addresses =
+                            Provider.of<OrdersProvider>(context, listen: false)
+                                .orders
+                                .map((order) => order.address.description)
+                                .toList();
+
+                        var route = '?daddr=';
+
+                        for (var address in addresses) {
+                          route += '$address+to:';
+                        }
+
+                        AndroidIntent(
+                          action: 'action_view',
+                          package: 'com.google.android.apps.maps',
+                          data:
+                              'http://maps.google.com/maps${Uri.encodeFull(route.substring(0, route.length - 4))}',
+                        ).launch();
+                      },
+                    ),
+                  ),
+                ];
+              }),
         ],
       ),
       body: SingleChildScrollView(
