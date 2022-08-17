@@ -37,6 +37,8 @@ class MyApp extends StatelessWidget {
             create: (_) => ProductsController(FirestoreProducts())),
         ChangeNotifierProvider<ClientsController>(
             create: (_) => ClientsController(FirestoreClients())),
+        ChangeNotifierProvider<OrdersController>(
+            create: (_) => OrdersController(FirestoreOrders())),
       ],
       child: app,
     );
