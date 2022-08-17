@@ -6,7 +6,7 @@ class FirestoreClients implements ClientsDataSource {
 
   @override
   Stream<List<Client>> all() {
-    return collection.snapshots().map(clientsFromSnapshot);
+    return collection.orderBy('name').snapshots().map(clientsFromSnapshot);
   }
 
   @override
