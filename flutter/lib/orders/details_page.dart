@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
 import 'package:app/orders/update_page.dart';
-import 'package:app/orders/model.dart';
+import 'package:delivery/orders.dart';
 import 'package:app/shared/currency.dart';
 import 'package:app/orders/provider.dart';
 import 'package:provider/provider.dart';

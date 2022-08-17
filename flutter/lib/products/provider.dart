@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:app/products/model.dart';
+import 'package:delivery/products.dart';
 
 class ProductsProvider extends ChangeNotifier {
   List<Product> products = [];

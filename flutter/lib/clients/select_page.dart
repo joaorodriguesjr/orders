@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:app/clients/create_page.dart';
 import 'package:app/clients/provider.dart';
-import 'package:app/clients/model.dart';
+import 'package:delivery/clients.dart';
 import 'package:provider/provider.dart';
 
 class SelectClientPage extends StatefulWidget {

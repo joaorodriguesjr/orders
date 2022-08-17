@@ -29,6 +29,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  delivery:
+    path: ../delivery
   intl:
   provider:
   firebase_core:
