@@ -64,7 +64,8 @@ class _UpdateOrderPageState extends State<UpdateOrderPage> {
 
                     setState(() => _order.add(item));
                   },
-                  icon: Icon(Icons.add, color: Theme.of(context).primaryColor),
+                  icon: Icon(Icons.add_circle_outline,
+                      color: Theme.of(context).primaryColor),
                 ),
               ),
               DataTable(
