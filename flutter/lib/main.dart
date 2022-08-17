@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 
 import 'firebase_options.dart';
 
-import 'pages/list_orders.dart';
+import 'views/list_orders.dart';
 import 'controllers.dart';
 
 void main() async {
