@@ -1,5 +1,5 @@
-import 'package:delivery/clients.dart';
-import 'package:delivery/products.dart';
+import '../clients.dart';
+import '../products.dart';
 
 class Item {
   Product product = Product();
