@@ -65,7 +65,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                     ],
                   ),
                   ListTile(
-                    leading: const Icon(Icons.location_on),
+                    leading: const Icon(Icons.location_on_outlined),
                     title: Text(order.address.description,
                         softWrap: false, overflow: TextOverflow.ellipsis),
                     subtitle: const Text('Visualizar no mapa'),
@@ -123,8 +123,8 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                                     12.0, 8.0, 12.0, 8.0),
                                 child: (order.payment.kind != 'PIX')
                                     ? const Icon(Icons.check_box_outline_blank,
-                                        color: Colors.black45)
-                                    : const Icon(Icons.check_box,
+                                        color: Colors.white)
+                                    : const Icon(Icons.check_circle_outline,
                                         color: Colors.black45),
                               ),
                               const Text('Pix'),
@@ -137,8 +137,8 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                                     12.0, 8.0, 12.0, 8.0),
                                 child: (order.payment.kind != 'DINHEIRO')
                                     ? const Icon(Icons.check_box_outline_blank,
-                                        color: Colors.black45)
-                                    : const Icon(Icons.check_box,
+                                        color: Colors.white)
+                                    : const Icon(Icons.check_circle_outline,
                                         color: Colors.black45),
                               ),
                               const Text('Dinheiro'),
@@ -151,8 +151,8 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                                     12.0, 8.0, 12.0, 8.0),
                                 child: (order.payment.kind != 'CARTAO')
                                     ? const Icon(Icons.check_box_outline_blank,
-                                        color: Colors.black45)
-                                    : const Icon(Icons.check_box,
+                                        color: Colors.white)
+                                    : const Icon(Icons.check_circle_outline,
                                         color: Colors.black45),
                               ),
                               const Text('Cartão'),
@@ -169,8 +169,8 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                                     12.0, 8.0, 12.0, 8.0),
                                 child: (order.payment.status != 'PAGO')
                                     ? const Icon(Icons.check_box_outline_blank,
-                                        color: Colors.black45)
-                                    : const Icon(Icons.check_box,
+                                        color: Colors.white)
+                                    : const Icon(Icons.check_circle_outline,
                                         color: Colors.black45),
                               ),
                               const Text('Recebido'),
@@ -183,8 +183,8 @@ class _OrderDetailsPageState extends State<OrderDetailsPage> {
                                     12.0, 8.0, 12.0, 8.0),
                                 child: (order.payment.status != 'A RECEBER')
                                     ? const Icon(Icons.check_box_outline_blank,
-                                        color: Colors.black45)
-                                    : const Icon(Icons.check_box,
+                                        color: Colors.white)
+                                    : const Icon(Icons.check_circle_outline,
                                         color: Colors.black45),
                               ),
                               const Text('A Receber'),
