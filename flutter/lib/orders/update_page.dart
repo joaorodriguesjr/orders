@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:delivery/orders.dart';
 import 'package:app/orders/provider.dart';
-import 'package:app/products/select_page.dart';
+import 'package:app/pages/select_product.dart';
 import 'package:provider/provider.dart';
 
 class UpdateOrderPage extends StatefulWidget {

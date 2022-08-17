@@ -3,7 +3,7 @@ import 'package:app/pages/select_client.dart';
 import 'package:delivery/clients.dart';
 import 'package:delivery/orders.dart';
 import 'package:app/orders/provider.dart';
-import 'package:app/products/select_page.dart';
+import 'package:app/pages/select_product.dart';
 import 'package:provider/provider.dart';
 
 class CreateOrderPage extends StatefulWidget {
