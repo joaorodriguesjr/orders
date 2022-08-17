@@ -5,7 +5,6 @@ import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 
 import 'pages/list_orders.dart';
-import 'orders/provider.dart';
 import 'controllers.dart';
 
 void main() async {
@@ -32,7 +31,6 @@ class MyApp extends StatelessWidget {
 
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<OrdersProvider>(create: (_) => OrdersProvider()),
         ChangeNotifierProvider<ProductsController>(
             create: (_) => ProductsController(FirestoreProducts())),
         ChangeNotifierProvider<ClientsController>(
