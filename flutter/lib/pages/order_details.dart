@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
-import 'package:app/orders/update_page.dart';
+import 'package:app/pages/update_order.dart';
 import 'package:delivery/orders.dart';
 import 'package:app/shared/currency.dart';
 import 'package:app/orders/provider.dart';
