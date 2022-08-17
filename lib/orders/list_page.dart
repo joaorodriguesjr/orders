@@ -49,29 +49,6 @@ class ListOrdersPageState extends State<ListOrdersPage> {
               ordersProvider.changeDate(date);
             },
           ),
-          IconButton(
-            icon: const Icon(Icons.more_vert),
-            onPressed: () {
-              var addresses =
-                  Provider.of<OrdersProvider>(context, listen: false)
-                      .orders
-                      .map((order) => order.address.description)
-                      .toList();
-
-              var route = '?daddr=';
-
-              for (var address in addresses) {
-                route += '$address+to:';
-              }
-
-              AndroidIntent(
-                action: 'action_view',
-                package: 'com.google.android.apps.maps',
-                data:
-                    'http://maps.google.com/maps${Uri.encodeFull(route.substring(0, route.length - 4))}',
-              ).launch();
-            },
-          ),
         ],
       ),
       body: SingleChildScrollView(
