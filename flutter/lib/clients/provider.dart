@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:delivery/clients/model.dart';
+import 'package:app/clients/model.dart';
 
 class ClientsProvider extends ChangeNotifier {
   List<Client> clients = [];

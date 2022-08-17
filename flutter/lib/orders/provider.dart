@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:delivery/clients/model.dart';
-import 'package:delivery/orders/model.dart';
+import 'package:app/clients/model.dart';
+import 'package:app/orders/model.dart';
 
 class OrdersProvider extends ChangeNotifier {
   List<Order> orders = [];

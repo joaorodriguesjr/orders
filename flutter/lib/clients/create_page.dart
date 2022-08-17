@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:delivery/clients/model.dart';
-import 'package:delivery/clients/provider.dart';
+import 'package:app/clients/model.dart';
+import 'package:app/clients/provider.dart';
 import 'package:provider/provider.dart';
 
 class CreateClientPage extends StatefulWidget {
