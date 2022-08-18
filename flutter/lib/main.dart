@@ -20,10 +20,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     var seedColor = const Color.fromARGB(255, 158, 46, 46);
     var background = const Color.fromARGB(255, 240, 240, 240);
+    var colorScheme = ColorScheme.fromSeed(seedColor: seedColor);
 
-    var theme =
-        ThemeData.from(colorScheme: ColorScheme.fromSeed(seedColor: seedColor))
-            .copyWith(scaffoldBackgroundColor: background);
+    var theme = ThemeData.from(colorScheme: colorScheme)
+        .copyWith(scaffoldBackgroundColor: background);
 
     var app = MaterialApp(
       title: 'Flutter Demo',
