@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         .copyWith(scaffoldBackgroundColor: background);
 
     var app = MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Food Delivery Management',
       debugShowCheckedModeBanner: false,
       theme: theme,
       home: const ListOrdersView(),
