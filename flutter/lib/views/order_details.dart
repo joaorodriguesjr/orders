@@ -282,3 +282,35 @@ class _OrderDetailsPageState extends State<OrderDetailsView> {
     );
   }
 }
+
+class OrderItems extends StatelessWidget {
+  final Order order;
+
+  const OrderItems({Key? key, required this.order}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    List<Widget> rows = [];
+
+    order.items.forEach((id, item) {
+      var row = Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text('${item.quantity}'),
+            Text(item.product.description),
+            Currency(value: item.quantity * item.product.price),
+          ],
+        ),
+      );
+
+      rows.add(row);
+    });
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
+      child: Column(children: rows),
+    );
+  }
+}
