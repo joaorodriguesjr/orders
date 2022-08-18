@@ -1,13 +1,12 @@
 import 'package:android_intent_plus/android_intent.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:intl/date_symbol_data_local.dart';
-import 'package:intl/intl.dart';
 import 'package:delivery/orders.dart';
 import 'package:provider/provider.dart';
 
+import 'package:app/helpers.dart';
 import 'update_order.dart';
-import '../helpers/currency.dart';
+import '../widgets/currency.dart';
 import '../controllers.dart';
 
 class OrderDetailsView extends StatefulWidget {
@@ -32,7 +31,7 @@ class _OrderDetailsPageState extends State<OrderDetailsView> {
           IconButton(
             icon: const Icon(Icons.print),
             onPressed: () {
-              printer.invokeMethod('print', {'text': _ticket()});
+              printer.invokeMethod('print', {'text': ticket(order)});
             },
           ),
           IconButton(
@@ -42,7 +41,7 @@ class _OrderDetailsPageState extends State<OrderDetailsView> {
                 package: 'com.whatsapp',
                 action: 'action_view',
                 data: Uri.encodeFull(
-                    'https://api.whatsapp.com/send?phone=${order.client.phone}&text=${_confirmation()}'),
+                    'https://api.whatsapp.com/send?phone=${order.client.phone}&text=${confirmation(order)}'),
               ).launch();
             },
           ),
@@ -281,52 +280,5 @@ class _OrderDetailsPageState extends State<OrderDetailsView> {
       padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
       child: Column(children: rows),
     );
-  }
-
-  String _ticket() {
-    initializeDateFormatting('pt_BR');
-    var datetime = DateFormat.yMMMMd('pt_BR').format(widget.order.datetime);
-    var ticket = '' +
-        "[C]<font size='tall'>Familia Delivery</font>\n\n" +
-        "[C]${datetime}\n\n" +
-        "[L]Cliente: [R]${widget.order.client.name}\n" +
-        "[L]${widget.order.address.description}.   ${widget.order.address.complement}\n" +
-        "--------------------------------\n" +
-        "";
-
-    for (var item in widget.order.items.entries) {
-      ticket +=
-          "[L]${item.value.quantity}x ${item.value.product.description} [R]R\$${item.value.quantity * item.value.product.price},00\n";
-    }
-
-    ticket += "\n" +
-        "[R]<b>Total</b> R\$${widget.order.total},00\n" +
-        "--------------------------------\n" +
-        "[L]Pagamento: [R]${widget.order.payment.kind}\n" +
-        "\n[C]<font size='big'>${widget.order.payment.status}</font>\n\n" +
-        "[C]Obrigado pela \n[C]preferencia!!!\n";
-
-    return ticket;
-  }
-
-  String _confirmation() {
-    initializeDateFormatting('pt_BR');
-    var datetime = DateFormat.yMMMMd('pt_BR').format(widget.order.datetime);
-    var message = '' +
-        "*Familia Delivery*\n\n" +
-        "${datetime}\n\n" +
-        "${widget.order.client.name}\n" +
-        "${widget.order.address.description}. [ *${widget.order.address.complement}* ]\n" +
-        "\n\n";
-
-    for (var item in widget.order.items.entries) {
-      message +=
-          "```${item.value.quantity}x ${item.value.product.description} R\$${item.value.quantity * item.value.product.price},00```\n";
-    }
-    message += "\n" +
-        "```Total R\$${widget.order.total},00```\n\n" +
-        "\nPagamento:  ${widget.order.payment.kind}  *${widget.order.payment.status}*\n" +
-        "";
-    return message;
   }
 }

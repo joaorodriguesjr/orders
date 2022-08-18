@@ -1,13 +1,12 @@
 import 'package:android_intent_plus/android_intent.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:intl/date_symbol_data_local.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
+import 'package:app/helpers.dart';
 import 'create_order.dart';
 import 'order_details.dart';
-import '../helpers/currency.dart';
+import '../widgets/currency.dart';
 import '../controllers.dart';
 
 class ListOrdersView extends StatefulWidget {
@@ -21,11 +20,6 @@ class ListOrdersPageState extends State<ListOrdersView> {
   @override
   Widget build(BuildContext context) {
     var controller = Provider.of<OrdersController>(context);
-
-    String format() {
-      initializeDateFormatting('pt_BR', null);
-      return DateFormat.MMMMEEEEd('pt_BR').format(controller.ordersDay);
-    }
 
     return Scaffold(
       appBar: AppBar(
@@ -93,7 +87,8 @@ class ListOrdersPageState extends State<ListOrdersView> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(format(), style: const TextStyle(color: Colors.black54)),
+                Text(dateFormat(controller.ordersDay),
+                    style: const TextStyle(color: Colors.black54)),
               ],
             ),
           ),
