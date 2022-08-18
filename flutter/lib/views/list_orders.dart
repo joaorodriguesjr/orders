@@ -97,7 +97,10 @@ class ListOrdersPageState extends State<ListOrdersView> {
               ],
             ),
           ),
-          Card(margin: const EdgeInsets.all(8.0), child: _orders()),
+          const Card(
+            margin: EdgeInsets.all(8.0),
+            child: OrdersList(),
+          ),
           const Padding(padding: EdgeInsets.symmetric(vertical: 14.0)),
         ],
       )),
@@ -115,46 +118,51 @@ class ListOrdersPageState extends State<ListOrdersView> {
       ),
     );
   }
+}
 
-  Widget _orders() {
-    return Consumer<OrdersController>(builder: (context, provider, child) {
-      return ListView.separated(
-        shrinkWrap: true,
-        primary: false,
-        itemCount: provider.orders.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            leading: const Icon(Icons.inventory_outlined),
-            title: Text(provider.orders[index].client.name),
-            subtitle: Text(
-              provider.orders[index].address.description,
-              overflow: TextOverflow.fade,
-              softWrap: false,
-            ),
-            trailing: Currency(value: provider.orders[index].total),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) =>
-                      OrderDetailsView(order: provider.orders[index]),
-                ),
-              );
-            },
-            onLongPress: () {
-              var order = provider.orders[index];
-              var snackBar = SnackBar(
-                behavior: SnackBarBehavior.floating,
-                content: Text(
-                    '${order.client.name} \n\n ${order.address.description}. \n - ${order.address.complement} -'),
-              );
+class OrdersList extends StatelessWidget {
+  const OrdersList({Key? key}) : super(key: key);
 
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
-            },
-          );
-        },
-        separatorBuilder: (context, index) => const Divider(),
-      );
-    });
+  @override
+  Widget build(BuildContext context) {
+    var provider = Provider.of<OrdersController>(context);
+
+    return ListView.separated(
+      shrinkWrap: true,
+      primary: false,
+      itemCount: provider.orders.length,
+      itemBuilder: (context, index) {
+        return ListTile(
+          leading: const Icon(Icons.inventory_outlined),
+          title: Text(provider.orders[index].client.name),
+          subtitle: Text(
+            provider.orders[index].address.description,
+            overflow: TextOverflow.fade,
+            softWrap: false,
+          ),
+          trailing: Currency(value: provider.orders[index].total),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    OrderDetailsView(order: provider.orders[index]),
+              ),
+            );
+          },
+          onLongPress: () {
+            var order = provider.orders[index];
+            var snackBar = SnackBar(
+              behavior: SnackBarBehavior.floating,
+              content: Text(
+                  '${order.client.name} \n\n${order.address.description}. \n - ${order.address.complement} -'),
+            );
+
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          },
+        );
+      },
+      separatorBuilder: (context, index) => const Divider(),
+    );
   }
 }
