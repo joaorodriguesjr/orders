@@ -48,237 +48,211 @@ class _OrderDetailsPageState extends State<OrderDetailsView> {
         ],
       ),
       body: SingleChildScrollView(
-          child: Card(
-              margin: const EdgeInsets.all(8),
-              child: Column(
+        child: Card(
+          margin: const EdgeInsets.all(8),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(0.0, 16.0, 0.0, 8.0),
-                        child: Text(
-                          order.client.name,
-                          style: const TextStyle(fontSize: 20),
-                        ),
-                      ),
-                    ],
-                  ),
-                  ListTile(
-                    leading: const Icon(Icons.location_on_outlined),
-                    title: Text(order.address.description,
-                        softWrap: false, overflow: TextOverflow.ellipsis),
-                    subtitle: const Text('Visualizar no mapa'),
-                    onTap: () {
-                      AndroidIntent(
-                        action: 'action_view',
-                        package: 'com.google.android.apps.maps',
-                        data:
-                            'http://maps.google.com/maps?daddr=${Uri.encodeFull(order.address.description)}',
-                      ).launch();
-                    },
-                  ),
-                  ListTile(
-                    leading: const Icon(Icons.whatsapp),
-                    title: Text(order.client.phone),
-                    subtitle: const Text('Enviar mensagem via WhatsApp'),
-                    onTap: () {
-                      AndroidIntent(
-                        package: 'com.whatsapp',
-                        action: 'action_view',
-                        data: Uri.encodeFull(
-                            'https://api.whatsapp.com/send?phone=${order.client.phone}'),
-                      ).launch();
-                    },
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Divider(),
-                  ),
-                  _items(),
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 24.0, vertical: 16.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Container(
-                            margin: const EdgeInsets.only(right: 16.0),
-                            child: const Text('Total')),
-                        Currency(value: order.total),
-                      ],
+                    padding: const EdgeInsets.fromLTRB(0.0, 16.0, 0.0, 8.0),
+                    child: Text(
+                      order.client.name,
+                      style: const TextStyle(fontSize: 20),
                     ),
                   ),
-                  const Divider(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                ],
+              ),
+              ListTile(
+                leading: const Icon(Icons.location_on_outlined),
+                title: Text(order.address.description,
+                    softWrap: false, overflow: TextOverflow.ellipsis),
+                subtitle: const Text('Visualizar no mapa'),
+                onTap: () {
+                  AndroidIntent(
+                    action: 'action_view',
+                    package: 'com.google.android.apps.maps',
+                    data:
+                        'http://maps.google.com/maps?daddr=${Uri.encodeFull(order.address.description)}',
+                  ).launch();
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.whatsapp),
+                title: Text(order.client.phone),
+                subtitle: const Text('Enviar mensagem via WhatsApp'),
+                onTap: () {
+                  AndroidIntent(
+                    package: 'com.whatsapp',
+                    action: 'action_view',
+                    data: Uri.encodeFull(
+                        'https://api.whatsapp.com/send?phone=${order.client.phone}'),
+                  ).launch();
+                },
+              ),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Divider(),
+              ),
+              OrderItems(order: order),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 24.0, vertical: 16.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Container(
+                        margin: const EdgeInsets.only(right: 16.0),
+                        child: const Text('Total')),
+                    Currency(value: order.total),
+                  ],
+                ),
+              ),
+              const Divider(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      Row(
                         children: [
-                          Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(
-                                    12.0, 8.0, 12.0, 8.0),
-                                child: (order.payment.kind != 'PIX')
-                                    ? const Icon(Icons.check_box_outline_blank,
-                                        color: Colors.white)
-                                    : const Icon(Icons.check_circle_outline,
-                                        color: Colors.black45),
-                              ),
-                              const Text('Pix'),
-                            ],
+                          Padding(
+                            padding:
+                                const EdgeInsets.fromLTRB(12.0, 8.0, 12.0, 8.0),
+                            child: (order.payment.kind != 'PIX')
+                                ? const Icon(Icons.check_box_outline_blank,
+                                    color: Colors.white)
+                                : const Icon(Icons.check_circle_outline,
+                                    color: Colors.black45),
                           ),
-                          Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(
-                                    12.0, 8.0, 12.0, 8.0),
-                                child: (order.payment.kind != 'DINHEIRO')
-                                    ? const Icon(Icons.check_box_outline_blank,
-                                        color: Colors.white)
-                                    : const Icon(Icons.check_circle_outline,
-                                        color: Colors.black45),
-                              ),
-                              const Text('Dinheiro'),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(
-                                    12.0, 8.0, 12.0, 8.0),
-                                child: (order.payment.kind != 'CARTAO')
-                                    ? const Icon(Icons.check_box_outline_blank,
-                                        color: Colors.white)
-                                    : const Icon(Icons.check_circle_outline,
-                                        color: Colors.black45),
-                              ),
-                              const Text('Cartão'),
-                            ],
-                          ),
+                          const Text('Pix'),
                         ],
                       ),
-                      Column(
+                      Row(
                         children: [
-                          Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(
-                                    12.0, 8.0, 12.0, 8.0),
-                                child: (order.payment.status != 'PAGO')
-                                    ? const Icon(Icons.check_box_outline_blank,
-                                        color: Colors.white)
-                                    : const Icon(Icons.check_circle_outline,
-                                        color: Colors.black45),
-                              ),
-                              const Text('Recebido'),
-                            ],
+                          Padding(
+                            padding:
+                                const EdgeInsets.fromLTRB(12.0, 8.0, 12.0, 8.0),
+                            child: (order.payment.kind != 'DINHEIRO')
+                                ? const Icon(Icons.check_box_outline_blank,
+                                    color: Colors.white)
+                                : const Icon(Icons.check_circle_outline,
+                                    color: Colors.black45),
                           ),
-                          Row(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(
-                                    12.0, 8.0, 12.0, 8.0),
-                                child: (order.payment.status != 'A RECEBER')
-                                    ? const Icon(Icons.check_box_outline_blank,
-                                        color: Colors.white)
-                                    : const Icon(Icons.check_circle_outline,
-                                        color: Colors.black45),
-                              ),
-                              const Text('A Receber'),
-                            ],
-                          ),
+                          const Text('Dinheiro'),
                         ],
                       ),
-                      const Padding(padding: EdgeInsets.only(right: 0.0)),
+                      Row(
+                        children: [
+                          Padding(
+                            padding:
+                                const EdgeInsets.fromLTRB(12.0, 8.0, 12.0, 8.0),
+                            child: (order.payment.kind != 'CARTAO')
+                                ? const Icon(Icons.check_box_outline_blank,
+                                    color: Colors.white)
+                                : const Icon(Icons.check_circle_outline,
+                                    color: Colors.black45),
+                          ),
+                          const Text('Cartão'),
+                        ],
+                      ),
                     ],
                   ),
-                  const Divider(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  Column(
                     children: [
-                      TextButton(
-                        child: const Text('EDITAR'),
-                        onPressed: () async {
-                          var updatedOrder = await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  UpdateOrderView(order: order),
-                            ),
-                          );
-
-                          if (updatedOrder == null) return;
-
-                          setState(() {
-                            order = updatedOrder as Order;
-                          });
-                        },
+                      Row(
+                        children: [
+                          Padding(
+                            padding:
+                                const EdgeInsets.fromLTRB(12.0, 8.0, 12.0, 8.0),
+                            child: (order.payment.status != 'PAGO')
+                                ? const Icon(Icons.check_box_outline_blank,
+                                    color: Colors.white)
+                                : const Icon(Icons.check_circle_outline,
+                                    color: Colors.black45),
+                          ),
+                          const Text('Recebido'),
+                        ],
                       ),
-                      TextButton(
-                        child: const Text('EXCLUIR'),
-                        onPressed: () async {
-                          final navigator = Navigator.of(context);
-                          var delete = await showDialog(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                              title: const Text('Excluir Pedido'),
-                              content: const Text(
-                                  'A exclusão é uma ação permanente. Deseja realmente excluir o pedido?'),
-                              actions: [
-                                TextButton(
-                                  child: const Text('Cancelar'),
-                                  onPressed: () =>
-                                      Navigator.pop(context, false),
-                                ),
-                                TextButton(
-                                  child: const Text('Excluir'),
-                                  onPressed: () {
-                                    Provider.of<OrdersController>(context,
-                                            listen: false)
-                                        .deleteOrder(order);
-                                    Navigator.pop(context, true);
-                                  },
-                                ),
-                              ],
-                            ),
-                          );
-
-                          if (delete) navigator.pop();
-                        },
+                      Row(
+                        children: [
+                          Padding(
+                            padding:
+                                const EdgeInsets.fromLTRB(12.0, 8.0, 12.0, 8.0),
+                            child: (order.payment.status != 'A RECEBER')
+                                ? const Icon(Icons.check_box_outline_blank,
+                                    color: Colors.white)
+                                : const Icon(Icons.check_circle_outline,
+                                    color: Colors.black45),
+                          ),
+                          const Text('A Receber'),
+                        ],
                       ),
                     ],
+                  ),
+                  const Padding(padding: EdgeInsets.only(right: 0.0)),
+                ],
+              ),
+              const Divider(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  TextButton(
+                    child: const Text('EDITAR'),
+                    onPressed: () async {
+                      var updatedOrder = await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => UpdateOrderView(order: order),
+                        ),
+                      );
+
+                      if (updatedOrder == null) return;
+
+                      setState(() {
+                        order = updatedOrder as Order;
+                      });
+                    },
+                  ),
+                  TextButton(
+                    child: const Text('EXCLUIR'),
+                    onPressed: () async {
+                      final navigator = Navigator.of(context);
+                      var delete = await showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: const Text('Excluir Pedido'),
+                          content: const Text(
+                              'A exclusão é uma ação permanente. Deseja realmente excluir o pedido?'),
+                          actions: [
+                            TextButton(
+                              child: const Text('Cancelar'),
+                              onPressed: () => Navigator.pop(context, false),
+                            ),
+                            TextButton(
+                              child: const Text('Excluir'),
+                              onPressed: () {
+                                Provider.of<OrdersController>(context,
+                                        listen: false)
+                                    .deleteOrder(order);
+                                Navigator.pop(context, true);
+                              },
+                            ),
+                          ],
+                        ),
+                      );
+
+                      if (delete) navigator.pop();
+                    },
                   ),
                 ],
-              ))),
-    );
-  }
-
-  Widget _items() {
-    var entries = widget.order.items.entries;
-    List<Widget> rows = [];
-
-    for (var item in entries) {
-      var row = Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text('${item.value.quantity}'),
-            Text(item.value.product.description),
-            Currency(value: item.value.quantity * item.value.product.price),
-          ],
+              ),
+            ],
+          ),
         ),
-      );
-
-      rows.add(row);
-    }
-
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
-      child: Column(children: rows),
+      ),
     );
   }
 }
