@@ -18,14 +18,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var theme = ThemeData.from(
+      colorScheme: ColorScheme.fromSeed(
+        seedColor: const Color.fromARGB(255, 158, 46, 46),
+      ),
+    ).copyWith(
+      scaffoldBackgroundColor: const Color.fromARGB(255, 240, 240, 240),
+    );
+
     var app = MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.from(
-        colorScheme: ColorScheme.fromSeed(
-            seedColor: const Color.fromARGB(255, 158, 46, 46)),
-      ).copyWith(
-          scaffoldBackgroundColor: const Color.fromARGB(255, 240, 240, 240)),
+      theme: theme,
       home: const ListOrdersView(),
     );
 
