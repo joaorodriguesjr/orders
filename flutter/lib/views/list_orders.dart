@@ -1,4 +1,5 @@
 import 'package:android_intent_plus/android_intent.dart';
+import 'package:delivery/orders.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -160,4 +161,20 @@ class OrdersList extends StatelessWidget {
       separatorBuilder: (context, index) => const Divider(),
     );
   }
+}
+
+launchDeliveryRoute(List<Order> orders) {
+  var route = '?daddr=';
+
+  for (var order in orders) {
+    route += '${order.address.description}+to:';
+  }
+
+  var query = Uri.encodeFull(route.substring(0, route.length - 4));
+
+  AndroidIntent(
+    action: 'action_view',
+    package: 'com.google.android.apps.maps',
+    data: 'http://maps.google.com/maps$query',
+  ).launch();
 }
