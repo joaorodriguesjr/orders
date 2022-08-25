@@ -19,9 +19,16 @@ class CreateOrderView extends StatefulWidget {
 class _CreateOrderPageState extends State<CreateOrderView> {
   var _client = Client()..name = 'Cliente';
 
-  final _order = Order()
-    ..payment.kind = 'PIX'
-    ..payment.status = 'A RECEBER';
+  final _order = Order();
+
+  @override
+  void initState() {
+    _order.datetime = widget.date;
+    _order.payment.kind = 'PIX';
+    _order.payment.status = 'A RECEBER';
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
