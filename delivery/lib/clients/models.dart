@@ -9,9 +9,7 @@ class Client {
   String phone = '';
   Address address = Address();
 
-  Client() {}
-
-  factory Client.restore(String id, Map<String, dynamic> data) {
+  static Client restore(String id, Map<String, dynamic> data) {
     return Client()
       ..id = id
       ..name = data['name']
