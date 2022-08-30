@@ -11,15 +11,7 @@ class FirestoreClients implements ClientsDataSource {
 
   @override
   Future<void> createClient(Client client) async {
-    var doc = await collection.add({
-      'name': client.name,
-      'phone': client.phone,
-      'address': {
-        'description': client.address.description,
-        'complement': client.address.complement,
-      },
-    });
-
+    var doc = await collection.add(client.data());
     client.id = doc.id;
   }
 
@@ -37,12 +29,5 @@ List<Client> clientsFromSnapshot(QuerySnapshot snapshot) {
 }
 
 Client clientFromDocument(DocumentSnapshot doc) {
-  var data = doc.data() as Map<String, dynamic>;
-
-  return Client()
-    ..id = doc.id
-    ..name = data['name']
-    ..phone = data['phone']
-    ..address.description = data['address']['description']
-    ..address.complement = data['address']['complement'];
+  return Client.restore(doc.id, doc.data() as Map<String, dynamic>);
 }
