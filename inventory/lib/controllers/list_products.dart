@@ -18,11 +18,8 @@ class ListProductsControllerState extends State<ListProductsController> {
     return ListProductsView(controller: this);
   }
 
-  onMainActionPress() async {
-    Widget builder(context) {
-      return const AlertDialog(content: Text('...'));
-    }
-
-    await showDialog(context: context, builder: builder);
+  onMainActionPress() {
+    Widget builder(innerContext) => const CreateProductController();
+    Navigator.of(context).push(MaterialPageRoute(builder: builder));
   }
 }
