@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:inventory/inventory.dart';
 
@@ -11,10 +13,16 @@ class ListProductsController extends StatefulWidget {
 class ListProductsControllerState extends State<ListProductsController> {
   List<Product> products = [];
 
+  late StreamSubscription<List<Product>> subscription;
+
   @override
   Widget build(BuildContext context) {
     var repository = Repository.of<ProductsRepository>(context);
-    setState(() => products = repository.all());
+
+    subscription = repository.allProducts().listen((products) {
+      setState(() => this.products = products);
+    });
+
     return ListProductsView(controller: this);
   }
 

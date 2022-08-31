@@ -10,6 +10,8 @@ dependencies:
   flutter:
     sdk: flutter
   provider:
+  firebase_core:
+  cloud_firestore:
 
 dev_dependencies:
   flutter_test:
