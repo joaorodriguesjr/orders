@@ -9,7 +9,7 @@ class FirestoreProducts implements ProductsRepository {
 
   @override
   Stream<List<Product>> allProducts() {
-    return collection.snapshots().map(productsFromSnapshot);
+    return collection.orderBy('name').snapshots().map(productsFromSnapshot);
   }
 }
 
