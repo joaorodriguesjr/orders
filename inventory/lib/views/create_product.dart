@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:inventory/controllers.dart';
+import 'package:inventory/widgets.dart';
 
 class CreateProductView extends StatelessWidget {
   final CreateProductControllerState controller;
@@ -19,12 +20,7 @@ class CreateProductView extends StatelessWidget {
           ),
         ],
       ),
-      body: const SingleChildScrollView(
-        child: Card(
-          margin: EdgeInsets.all(12.0),
-          child: ListTile(title: Text('...')),
-        ),
-      ),
+      body: const Body(child: ListTile(title: Text('...'))),
     );
   }
 }

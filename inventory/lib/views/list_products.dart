@@ -24,11 +24,8 @@ class ListProductsView extends StatelessWidget {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Card(
-          margin: const EdgeInsets.all(12.0),
-          child: ProductsList(products: controller.products),
-        ),
+      body: Body(
+        child: ProductsList(products: controller.products),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: controller.onMainActionPress,
