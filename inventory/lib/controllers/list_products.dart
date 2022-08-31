@@ -27,8 +27,8 @@ class ListProductsControllerState extends State<ListProductsController> {
   }
 
   @override
-  void dispose() {
-    _subscription.cancel();
+  void dispose() async {
+    await _subscription.cancel();
     super.dispose();
   }
 
