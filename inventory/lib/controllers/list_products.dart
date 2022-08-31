@@ -13,17 +13,23 @@ class ListProductsController extends StatefulWidget {
 class ListProductsControllerState extends State<ListProductsController> {
   List<Product> products = [];
 
-  late StreamSubscription<List<Product>> subscription;
+  late StreamSubscription<List<Product>> _subscription;
 
   @override
   Widget build(BuildContext context) {
     var repository = Repository.of<ProductsRepository>(context);
 
-    subscription = repository.allProducts().listen((products) {
+    _subscription = repository.allProducts().listen((products) {
       setState(() => this.products = products);
     });
 
     return ListProductsView(controller: this);
+  }
+
+  @override
+  void dispose() {
+    _subscription.cancel();
+    super.dispose();
   }
 
   onMainActionPress() {
