@@ -19,9 +19,5 @@ List<Product> productsFromSnapshot(QuerySnapshot snapshot) {
 
 Product productFromDocument(DocumentSnapshot doc) {
   var data = doc.data() as Map<String, dynamic>;
-
-  return Product()
-    ..code = doc.id
-    ..name = data['name']
-    ..description = data['description'];
+  return Product.restore(doc.id, data);
 }
