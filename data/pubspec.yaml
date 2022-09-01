@@ -2,6 +2,8 @@ name: data
 description: A new Flutter package project.
 version: 0.0.1
 
+publish_to: 'none'
+
 environment:
   sdk: '>=2.18.0 <3.0.0'
   flutter: ">=1.17.0"
@@ -11,6 +13,8 @@ dependencies:
     sdk: flutter
   firebase_core: '>=1.0.0'
   cloud_firestore: '>=3.4.0'
+  inventory:
+    path: ../inventory
 
 dev_dependencies:
   flutter_test:
