@@ -12,7 +12,7 @@ initializeAppData() async {
       name: 'inventory', options: InventoryFirebaseOptions.currentPlatform);
 }
 
-var _ordersApp = Firebase.app('orders');
+var _ordersApp = Firebase.app();
 var ordersFirestore = FirebaseFirestore.instanceFor(app: _ordersApp);
 
 var _inventoryApp = Firebase.app('inventory');
