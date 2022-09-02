@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:data/data.dart';
 
 import 'instances.dart';
+import 'controllers.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,7 +22,7 @@ class App extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(colorSchemeSeed: seed, scaffoldBackgroundColor: back),
       debugShowCheckedModeBanner: false,
-      home: const Scaffold(),
+      home: const ListProductsController(),
     );
 
     return withInstances(app);

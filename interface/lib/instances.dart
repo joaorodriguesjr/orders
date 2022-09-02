@@ -21,5 +21,5 @@ Widget withInstances(Widget child) {
 }
 
 class DataQuery {
-  static of<Type>(BuildContext context) => Provider.of<Type>(context);
+  static Type of<Type>(BuildContext context) => Provider.of<Type>(context);
 }
