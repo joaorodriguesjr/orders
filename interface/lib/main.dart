@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:data/data.dart';
 
-import 'providers.dart';
+import 'instances.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,6 +24,6 @@ class App extends StatelessWidget {
       home: const Scaffold(),
     );
 
-    return MultiProvider(providers: providers, child: app);
+    return withInstances(app);
   }
 }

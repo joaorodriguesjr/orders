@@ -7,7 +7,7 @@ import 'package:data/data.dart';
 import 'package:inventory/inventory.dart' as inventory;
 import 'package:data/inventory.dart' as data_inventory;
 
-var providers = [
+var _providers = [
   Provider<inventory.ProductsQuery>(
     create: (_) {
       return data_inventory.FirestoreProducts(
@@ -15,6 +15,10 @@ var providers = [
     },
   ),
 ];
+
+Widget withInstances(Widget child) {
+  return MultiProvider(providers: _providers, child: child);
+}
 
 class DataQuery {
   static of<Type>(BuildContext context) => Provider.of<Type>(context);
