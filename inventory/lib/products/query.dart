@@ -1,5 +1,5 @@
 import 'product.dart';
 
-abstract class ProductsQueries {
+abstract class ProductsQuery {
   Stream<List<Product>> allProducts();
 }

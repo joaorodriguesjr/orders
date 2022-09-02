@@ -8,7 +8,7 @@ import 'package:inventory/inventory.dart' as inventory;
 import 'package:data/inventory.dart' as data_inventory;
 
 var providers = [
-  Provider<inventory.ProductsQueries>(
+  Provider<inventory.ProductsQuery>(
     create: (_) {
       return data_inventory.FirestoreProducts(
           inventoryFirestore.collection('products'));

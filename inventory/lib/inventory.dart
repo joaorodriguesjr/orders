@@ -1,2 +1,2 @@
 export 'products/product.dart';
-export 'products/queries.dart';
+export 'products/query.dart';

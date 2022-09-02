@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:inventory/inventory.dart';
 
-class FirestoreProducts implements ProductsQueries {
+class FirestoreProducts implements ProductsQuery {
   final CollectionReference collection;
 
   FirestoreProducts(this.collection);
