@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:delivery/controllers.dart';
 import 'package:flutter/material.dart';
 import 'package:inventory/inventory.dart';
 import 'package:delivery/instances.dart';
@@ -14,6 +15,11 @@ class ListProductsController extends StatefulWidget {
 
 class ListProductsControllerState extends State<ListProductsController> {
   late List<Product> products = [];
+
+  onMainActionPress() {
+    Widget builder(innerContext) => const CreateProductController();
+    Navigator.of(context).push(MaterialPageRoute(builder: builder));
+  }
 
   @override
   Widget build(BuildContext context) {
