@@ -27,7 +27,7 @@ class ListProductsView extends StatelessWidget {
         child: ProductsList(products: controller.products),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: controller.onMainActionPress,
         child: const Icon(Icons.add),
       ),
     );
