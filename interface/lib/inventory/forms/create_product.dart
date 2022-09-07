@@ -1,3 +1,4 @@
+import 'package:delivery/helpers.dart';
 import 'package:flutter/material.dart';
 
 class CreateProductForm extends StatefulWidget {
@@ -28,8 +29,8 @@ class _CreateProductFormState extends State<CreateProductForm> {
           ),
           trailing: IconButton(
             icon: const Icon(Icons.qr_code_scanner),
-            onPressed: () {
-              _barcodeController.text = '*************';
+            onPressed: () async {
+              _barcodeController.text = await barcodeScan();
             },
           ),
         )
