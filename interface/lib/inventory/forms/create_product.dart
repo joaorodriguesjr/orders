@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class CreateProductForm extends StatefulWidget {
-  const CreateProductForm({super.key});
+  final Function(Map<String, dynamic> data) onFormData;
+
+  const CreateProductForm({super.key, required this.onFormData});
 
   @override
   State<CreateProductForm> createState() => _CreateProductFormState();
@@ -14,9 +16,7 @@ class _CreateProductFormState extends State<CreateProductForm> {
   Widget build(BuildContext context) {
     return Form(
       key: _key,
-      child: Column(
-        children: const [],
-      ),
+      child: Column(children: const []),
     );
   }
 }
