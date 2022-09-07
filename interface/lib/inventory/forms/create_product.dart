@@ -8,12 +8,12 @@ class CreateProductForm extends StatefulWidget {
 }
 
 class _CreateProductFormState extends State<CreateProductForm> {
-  final form = GlobalKey<FormState>();
+  final _key = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: form,
+      key: _key,
       child: Column(
         children: const [],
       ),
