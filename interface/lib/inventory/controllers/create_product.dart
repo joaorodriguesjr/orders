@@ -13,6 +13,8 @@ class CreateProductController extends StatefulWidget {
 class CreateProductControllerState extends State<CreateProductController> {
   Product product = Product();
 
+  onFormData(Map<String, dynamic> data) {}
+
   @override
   Widget build(BuildContext context) {
     return CreateProductView(controller: this);

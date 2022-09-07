@@ -1,4 +1,5 @@
 import 'package:delivery/controllers.dart';
+import 'package:delivery/forms.dart';
 import 'package:delivery/views.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +21,7 @@ class CreateProductView extends StatelessWidget {
           ),
         ],
       ),
-      body: const Body(child: ListTile(title: Text('...'))),
+      body: Body(child: CreateProductForm(onFormData: controller.onFormData)),
     );
   }
 }
