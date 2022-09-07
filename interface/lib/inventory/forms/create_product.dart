@@ -12,11 +12,34 @@ class CreateProductForm extends StatefulWidget {
 class _CreateProductFormState extends State<CreateProductForm> {
   final _key = GlobalKey<FormState>();
 
+  final _barcodeController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Form(
       key: _key,
-      child: Column(children: const []),
+      child: Column(children: [
+        ListTile(
+          leading: const Icon(Icons.onetwothree),
+          title: TextFormField(
+            controller: _barcodeController,
+            keyboardType: TextInputType.number,
+            decoration: const InputDecoration(labelText: 'Código'),
+          ),
+          trailing: IconButton(
+            icon: const Icon(Icons.qr_code_scanner),
+            onPressed: () {
+              _barcodeController.text = '*************';
+            },
+          ),
+        )
+      ]),
     );
+  }
+
+  @override
+  void dispose() {
+    _barcodeController.dispose();
+    super.dispose();
   }
 }
