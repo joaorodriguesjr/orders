@@ -30,7 +30,13 @@ class _CreateProductFormState extends State<CreateProductForm> {
           trailing: IconButton(
             icon: const Icon(Icons.qr_code_scanner),
             onPressed: () async {
-              _barcodeController.text = await barcodeScan();
+              var scan = await barcodeScan();
+
+              if (scan == '-1') {
+                return;
+              }
+
+              _barcodeController.text = scan;
             },
           ),
         )
