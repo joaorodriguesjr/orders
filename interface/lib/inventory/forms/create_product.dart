@@ -48,7 +48,7 @@ class _CreateProductFormState extends State<CreateProductForm> {
           ),
         ),
         ListTile(
-          leading: const Icon(Icons.abc),
+          leading: const Icon(Icons.subtitles),
           title: TextFormField(
             keyboardType: TextInputType.number,
             decoration: const InputDecoration(labelText: 'Descrição'),
