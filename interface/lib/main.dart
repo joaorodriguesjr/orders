@@ -22,7 +22,15 @@ class App extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(colorSchemeSeed: seed, scaffoldBackgroundColor: back),
       debugShowCheckedModeBanner: false,
-      home: const ListProductsController(),
+      initialRoute: 'inventory/products',
+      routes: {
+        'inventory/products': (context) {
+          return const ListProductsController();
+        },
+        'inventory/products/create': (context) {
+          return const CreateProductController();
+        },
+      },
     );
 
     return withInstances(app);
