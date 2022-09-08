@@ -10,6 +10,7 @@ class Product {
 
   static Product create(Map<String, dynamic> data) {
     return Product()
+      ..code = data['code']
       ..name = data['name']
       ..description = data['description'];
   }
