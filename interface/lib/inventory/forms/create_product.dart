@@ -39,7 +39,30 @@ class _CreateProductFormState extends State<CreateProductForm> {
               _barcodeController.text = scan;
             },
           ),
-        )
+        ),
+        ListTile(
+          leading: const Icon(Icons.abc),
+          title: TextFormField(
+            keyboardType: TextInputType.number,
+            decoration: const InputDecoration(labelText: 'Produto'),
+          ),
+        ),
+        ListTile(
+          leading: const Icon(Icons.abc),
+          title: TextFormField(
+            keyboardType: TextInputType.number,
+            decoration: const InputDecoration(labelText: 'Descrição'),
+          ),
+        ),
+        ButtonBar(
+          alignment: MainAxisAlignment.spaceAround,
+          children: [
+            TextButton(
+              onPressed: () {},
+              child: const Text('SALVAR'),
+            ),
+          ],
+        ),
       ]),
     );
   }
