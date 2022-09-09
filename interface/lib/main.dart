@@ -33,8 +33,8 @@ class App extends StatelessWidget {
         'inventory/products/create': (context) {
           return const CreateProductController();
         },
-        'inventory/entries/register': (context) {
-          return const RegisterEntryController();
+        'inventory/entries/create': (context) {
+          return const CreateEntryController();
         },
       },
     );

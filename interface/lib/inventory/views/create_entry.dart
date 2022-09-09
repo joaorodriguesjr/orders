@@ -2,11 +2,10 @@ import 'package:delivery/controllers.dart';
 import 'package:delivery/views.dart';
 import 'package:flutter/material.dart';
 
-class RegisterEntryView extends StatelessWidget {
-  final RegisterEntryControllerState controller;
+class CreateEntryView extends StatelessWidget {
+  final CreateEntryControllerState controller;
 
-  const RegisterEntryView({Key? key, required this.controller})
-      : super(key: key);
+  const CreateEntryView({Key? key, required this.controller}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
