@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:inventory/inventory.dart';
+import 'package:delivery/instances.dart';
 import 'package:delivery/views.dart';
 
 class CreateProductController extends StatefulWidget {
@@ -11,9 +12,15 @@ class CreateProductController extends StatefulWidget {
 }
 
 class CreateProductControllerState extends State<CreateProductController> {
-  Product product = Product();
+  onFormData(Map<String, dynamic> data) {
+    final navigator = Navigator.of(context);
 
-  onFormData(Map<String, dynamic> data) {}
+    final persistence = Persistence.of<ProductsPersistence>(context);
+    final product = Product.create(data);
+
+    persistence.persist(product);
+    navigator.pop();
+  }
 
   @override
   Widget build(BuildContext context) {
