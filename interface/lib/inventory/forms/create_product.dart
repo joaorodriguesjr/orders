@@ -39,7 +39,7 @@ class _CreateProductFormState extends State<CreateProductForm> {
   }
 
   fieldSave(String name) {
-    return (value) => _data[name] = value;
+    return (value) => _data[name] = (value as String).trim();
   }
 
   @override
