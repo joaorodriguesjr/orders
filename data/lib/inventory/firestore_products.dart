@@ -13,7 +13,7 @@ class FirestoreProducts implements ProductsQuery, ProductsPersistence {
 
   @override
   Future<void> persist(Product product) async {
-    await collection
+    collection
         .doc(product.code)
         .set({'name': product.name, 'description': product.description});
   }
