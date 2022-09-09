@@ -38,6 +38,10 @@ class _CreateProductFormState extends State<CreateProductForm> {
     widget.onFormData(_data);
   }
 
+  fieldSave(String name) {
+    return (value) => _data[name] = value;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -50,7 +54,7 @@ class _CreateProductFormState extends State<CreateProductForm> {
             keyboardType: TextInputType.number,
             decoration: const InputDecoration(labelText: 'Código'),
             validator: requiredField,
-            onSaved: (value) => _data['code'] = value,
+            onSaved: fieldSave('code'),
           ),
           trailing: IconButton(
             icon: const Icon(Icons.qr_code_scanner),
@@ -63,7 +67,7 @@ class _CreateProductFormState extends State<CreateProductForm> {
             keyboardType: TextInputType.text,
             decoration: const InputDecoration(labelText: 'Produto'),
             validator: requiredField,
-            onSaved: (value) => _data['name'] = value,
+            onSaved: fieldSave('name'),
           ),
         ),
         ListTile(
@@ -72,7 +76,7 @@ class _CreateProductFormState extends State<CreateProductForm> {
             keyboardType: TextInputType.text,
             decoration: const InputDecoration(labelText: 'Descrição'),
             validator: requiredField,
-            onSaved: (value) => _data['description'] = value,
+            onSaved: fieldSave('description'),
           ),
         ),
         ButtonBar(
