@@ -30,7 +30,7 @@ class DashboardView extends StatelessWidget {
             alignment: MainAxisAlignment.spaceAround,
             children: [
               TextButton.icon(
-                onPressed: () {},
+                onPressed: controller.onRegisterEntryPressed,
                 icon: const Icon(Icons.keyboard_double_arrow_down),
                 label: const Text('ENTRADA'),
               ),

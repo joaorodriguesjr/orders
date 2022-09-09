@@ -9,6 +9,10 @@ class DashboardController extends StatefulWidget {
 }
 
 class DashboardControllerState extends State<DashboardController> {
+  onRegisterEntryPressed() {
+    Navigator.of(context).pushNamed('inventory/entries/register');
+  }
+
   @override
   Widget build(BuildContext context) {
     return DashboardView(controller: this);
