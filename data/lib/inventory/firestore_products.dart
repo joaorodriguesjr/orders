@@ -12,6 +12,12 @@ class FirestoreProducts implements ProductsQuery, ProductsPersistence {
   }
 
   @override
+  Future<Product?> findByCode(String code) async {
+    final doc = await collection.doc(code).get();
+    return (doc.exists) ? productFromDocument(doc) : null;
+  }
+
+  @override
   Future<void> persist(Product product) async {
     collection
         .doc(product.code)
