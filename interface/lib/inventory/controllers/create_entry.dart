@@ -18,7 +18,9 @@ class CreateEntryControllerState extends State<CreateEntryController> {
 
   onFormData(Map<String, dynamic> data) async {
     if (product.code.isEmpty) {
-      return;
+      const snackBar = SnackBar(
+          content: Text('Selecione um produto para registrar uma entrada.'));
+      return ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
 
     Navigator.of(context).pop();
