@@ -1,4 +1,5 @@
 import 'package:delivery/controllers.dart';
+import 'package:delivery/forms.dart';
 import 'package:delivery/views.dart';
 import 'package:flutter/material.dart';
 
@@ -21,7 +22,23 @@ class CreateEntryView extends StatelessWidget {
       ),
       body: Body(
           child: Column(
-        children: [],
+        children: [
+          ListTile(
+            title: Text(controller.product.name),
+            subtitle: Text(controller.product.description),
+            trailing: Wrap(children: [
+              IconButton(
+                onPressed: controller.onScanProductPressed,
+                icon: const Icon(Icons.qr_code_scanner),
+              ),
+              IconButton(
+                onPressed: controller.onSelectProductPressed,
+                icon: const Icon(Icons.search),
+              ),
+            ]),
+          ),
+          CreateEntryForm(onFormData: controller.onFormData),
+        ],
       )),
     );
   }
