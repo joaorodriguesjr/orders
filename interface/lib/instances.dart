@@ -12,6 +12,10 @@ var _providers = [
     create: (_) => data_inventory.FirestoreProducts(
         inventoryFirestore.collection('products')),
   ),
+  Provider<data_inventory.FirestoreRecords>(
+    create: (_) => data_inventory.FirestoreRecords(
+        inventoryFirestore.collection('records')),
+  ),
   Provider<inventory.ProductsQuery>(
     create: (context) =>
         Provider.of<data_inventory.FirestoreProducts>(context, listen: false),
@@ -19,6 +23,10 @@ var _providers = [
   Provider<inventory.ProductsPersistence>(
     create: (context) =>
         Provider.of<data_inventory.FirestoreProducts>(context, listen: false),
+  ),
+  Provider<inventory.RecordsPersistence>(
+    create: (context) =>
+        Provider.of<data_inventory.FirestoreRecords>(context, listen: false),
   ),
 ];
 
