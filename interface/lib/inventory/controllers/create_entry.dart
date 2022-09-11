@@ -23,6 +23,10 @@ class CreateEntryControllerState extends State<CreateEntryController> {
       return ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
 
+    final persistence = Persistence.of<RecordsPersistence>(context);
+    final record = Record.create(data, product);
+    persistence.persist(record);
+
     Navigator.of(context).pop();
   }
 
