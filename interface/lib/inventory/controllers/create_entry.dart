@@ -38,8 +38,15 @@ class CreateEntryControllerState extends State<CreateEntryController> {
     if (product != null) setState(() => this.product = product);
   }
 
-  onSelectProductPressed() {
-    Navigator.of(context).pushNamed('inventory/products');
+  onSelectProductPressed() async {
+    final selection = await Navigator.of(context)
+        .pushNamed('inventory/products/select') as Product?;
+
+    if (selection == null) {
+      return;
+    }
+
+    setState(() => product = selection);
   }
 
   @override
