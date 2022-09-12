@@ -14,6 +14,7 @@ class ProductsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.separated(
       shrinkWrap: true,
+      physics: const ClampingScrollPhysics(),
       itemBuilder: (context, index) {
         var product = products[index];
         return ListTile(
