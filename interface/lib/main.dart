@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:data/data.dart';
 
 import 'instances.dart';
-import 'controllers.dart';
+import 'routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,23 +23,7 @@ class App extends StatelessWidget {
       theme: ThemeData(colorSchemeSeed: seed, scaffoldBackgroundColor: back),
       debugShowCheckedModeBanner: false,
       initialRoute: 'inventory',
-      routes: {
-        'inventory': (context) {
-          return const DashboardController();
-        },
-        'inventory/products': (context) {
-          return const ListProductsController();
-        },
-        'inventory/products/select': (context) {
-          return const SelectProductController();
-        },
-        'inventory/products/create': (context) {
-          return const CreateProductController();
-        },
-        'inventory/entries/create': (context) {
-          return const CreateEntryController();
-        },
-      },
+      routes: routes,
     );
 
     return withInstances(app);
