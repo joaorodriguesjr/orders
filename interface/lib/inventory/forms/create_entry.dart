@@ -34,9 +34,9 @@ class _CreateEntryFormState extends State<CreateEntryForm> {
       return 'Campo obrigatório';
     }
 
-    final price = double.tryParse(value);
+    final number = double.tryParse(value);
 
-    if (price == null) {
+    if (number == null) {
       return 'Valor numérico inválido';
     }
 
