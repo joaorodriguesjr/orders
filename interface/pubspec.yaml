@@ -32,6 +32,7 @@ dependencies:
   flutter:
     sdk: flutter
   provider: '>=6.0.0'
+  material_design_icons_flutter: ^5.0.6996
   flutter_barcode_scanner: '>=2.0.0'
   inventory:
     path: ../inventory
@@ -95,3 +96,7 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+  fonts:
+    - family: inventory
+      fonts:
+        - asset: fonts/inventory.ttf
