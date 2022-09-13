@@ -9,6 +9,10 @@ class DashboardController extends StatefulWidget {
 }
 
 class DashboardControllerState extends State<DashboardController> {
+  onMainActionPressed() {
+    Navigator.of(context).pushNamed('inventory/products/create');
+  }
+
   onCreateEntryPressed() {
     Navigator.of(context).pushNamed('inventory/entries/create');
   }
