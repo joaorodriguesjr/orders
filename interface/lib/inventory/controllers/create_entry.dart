@@ -35,7 +35,9 @@ class CreateEntryControllerState extends State<CreateEntryController> {
     final code = await barcodeScan();
     final product = await products.findByCode(code);
 
-    if (product != null) setState(() => this.product = product);
+    if (product is Product) {
+      return setState(() => this.product = product);
+    }
   }
 
   onSelectProductPressed() async {
