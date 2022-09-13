@@ -1,4 +1,5 @@
 import 'package:delivery/controllers.dart';
+import 'package:delivery/icons.dart';
 import 'package:delivery/views.dart';
 import 'package:flutter/material.dart';
 
@@ -23,26 +24,33 @@ class DashboardView extends StatelessWidget {
           ),
         ],
       ),
-      body: Body(
-          child: Column(
-        children: [
-          ButtonBar(
-            alignment: MainAxisAlignment.spaceAround,
+      body: const Body(child: Center(child: Text('...'))),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Theme.of(context).primaryColor,
+        onPressed: controller.onMainActionPressed,
+        child: const Icon(MdiIcons.trayPlus),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        shape: const CircularNotchedRectangle(),
+        color: Theme.of(context).primaryColor,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 56.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              TextButton.icon(
+              IconButton(
                 onPressed: controller.onCreateEntryPressed,
-                icon: const Icon(Icons.keyboard_double_arrow_down),
-                label: const Text('ENTRADA'),
+                icon: const Icon(CustomIcons.inventory_in, color: Colors.white),
               ),
-              TextButton.icon(
+              IconButton(
                 onPressed: () {},
-                icon: const Icon(Icons.keyboard_double_arrow_up),
-                label: const Text('SAÍDA'),
+                icon: const Icon(CustomIcons.inventory_ou, color: Colors.white),
               ),
             ],
-          )
-        ],
-      )),
+          ),
+        ),
+      ),
     );
   }
 }
