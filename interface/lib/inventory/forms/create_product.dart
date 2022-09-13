@@ -48,7 +48,6 @@ class _CreateProductFormState extends State<CreateProductForm> {
       key: _key,
       child: Column(children: [
         ListTile(
-          leading: const Icon(Icons.onetwothree),
           title: TextFormField(
             controller: _barcodeController,
             keyboardType: TextInputType.number,
@@ -62,7 +61,6 @@ class _CreateProductFormState extends State<CreateProductForm> {
           ),
         ),
         ListTile(
-          leading: const Icon(Icons.abc),
           title: TextFormField(
             keyboardType: TextInputType.text,
             decoration: const InputDecoration(labelText: 'Produto'),
@@ -71,7 +69,6 @@ class _CreateProductFormState extends State<CreateProductForm> {
           ),
         ),
         ListTile(
-          leading: const Icon(Icons.subtitles),
           title: TextFormField(
             keyboardType: TextInputType.text,
             decoration: const InputDecoration(labelText: 'Descrição'),
