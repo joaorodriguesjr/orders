@@ -29,7 +29,7 @@ class DashboardView extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).primaryColor,
         onPressed: controller.onMainActionPressed,
-        child: const Icon(MdiIcons.trayPlus),
+        child: const Icon(CustomIcons.package_plus),
       ),
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
