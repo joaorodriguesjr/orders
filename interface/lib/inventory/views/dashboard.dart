@@ -35,7 +35,7 @@ class DashboardView extends StatelessWidget {
         shape: const CircularNotchedRectangle(),
         color: Theme.of(context).primaryColor,
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 12.0),
+          padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
