@@ -25,7 +25,7 @@ class DashboardView extends StatelessWidget {
         ],
       ),
       body: const Body(child: Center(child: Text('...'))),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButtonLocation: FloatingActionButtonLocation.startDocked,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).primaryColor,
         onPressed: controller.onMainActionPressed,
@@ -35,14 +35,15 @@ class DashboardView extends StatelessWidget {
         shape: const CircularNotchedRectangle(),
         color: Theme.of(context).primaryColor,
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 56.0),
+          padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 12.0),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
               IconButton(
                 onPressed: controller.onCreateEntryPressed,
                 icon: const Icon(CustomIcons.inventory_in, color: Colors.white),
               ),
+              const Padding(padding: EdgeInsets.all(8.0)),
               IconButton(
                 onPressed: () {},
                 icon: const Icon(CustomIcons.inventory_ou, color: Colors.white),
