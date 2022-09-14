@@ -10,5 +10,4 @@ class CustomIcons {
       IconData(0xe900, fontFamily: _fontFamily);
   static const IconData inventory_ou =
       IconData(0xe901, fontFamily: _fontFamily);
-  static const IconData add_product = IconData(0xe902, fontFamily: _fontFamily);
 }
