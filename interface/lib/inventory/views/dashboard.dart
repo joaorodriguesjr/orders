@@ -26,11 +26,6 @@ class DashboardView extends StatelessWidget {
       ),
       body: const Body(child: Center(child: Text('...'))),
       floatingActionButtonLocation: FloatingActionButtonLocation.startDocked,
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Theme.of(context).primaryColor,
-        onPressed: controller.onMainActionPressed,
-        child: const Icon(CustomIcons.package_plus),
-      ),
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
         color: Theme.of(context).primaryColor,
@@ -51,6 +46,11 @@ class DashboardView extends StatelessWidget {
             ],
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Theme.of(context).primaryColor,
+        onPressed: controller.onMainActionPressed,
+        child: const Icon(CustomIcons.package_plus),
       ),
     );
   }
