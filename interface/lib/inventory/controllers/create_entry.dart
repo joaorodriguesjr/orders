@@ -24,7 +24,7 @@ class CreateEntryControllerState extends State<CreateEntryController> {
     }
 
     final persistence = Persistence.of<RecordsPersistence>(context);
-    final record = Record.create(data, product);
+    final record = Record.createEntryRecord(data, product);
     persistence.persist(record);
 
     Navigator.of(context).pop();

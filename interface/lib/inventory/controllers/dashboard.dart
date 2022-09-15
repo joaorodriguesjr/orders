@@ -14,7 +14,11 @@ class DashboardControllerState extends State<DashboardController> {
   }
 
   onCreateEntryPressed() {
-    Navigator.of(context).pushNamed('inventory/entries/create');
+    Navigator.of(context).pushNamed('inventory/records/entry');
+  }
+
+  onCreateExitPressed() {
+    Navigator.of(context).pushNamed('inventory/records/exit');
   }
 
   @override

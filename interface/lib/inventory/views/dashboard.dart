@@ -45,7 +45,7 @@ class DashboardView extends StatelessWidget {
               ),
               const Padding(padding: EdgeInsets.all(8.0)),
               IconButton(
-                onPressed: () {},
+                onPressed: controller.onCreateExitPressed,
                 icon: const Icon(CustomIcons.inventory_ou, color: Colors.white),
               ),
             ],

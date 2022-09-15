@@ -9,7 +9,7 @@ class Record {
 
   Product product = Product();
 
-  static Record create(Map<String, dynamic> data, Product product) {
+  static Record createEntryRecord(Map<String, dynamic> data, Product product) {
     return Record()
       ..price = data['price']
       ..quantity = data['quantity']

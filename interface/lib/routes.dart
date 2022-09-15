@@ -13,7 +13,10 @@ final routes = {
   'inventory/products/create': (context) {
     return const CreateProductController();
   },
-  'inventory/entries/create': (context) {
+  'inventory/records/entry': (context) {
     return const CreateEntryController();
+  },
+  'inventory/records/exit': (context) {
+    return const CreateExitController();
   },
 };
