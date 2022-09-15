@@ -15,4 +15,10 @@ class Record {
       ..quantity = data['quantity']
       ..product = product;
   }
+
+  static Record createExitRecord(Map<String, dynamic> data, Product product) {
+    return Record()
+      ..quantity = (-data['quantity'])
+      ..product = product;
+  }
 }
