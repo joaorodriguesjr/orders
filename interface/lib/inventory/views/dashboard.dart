@@ -10,6 +10,8 @@ class DashboardView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -28,27 +30,26 @@ class DashboardView extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.startDocked,
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
-        color: Theme.of(context).primaryColor,
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20.0),
+          padding: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 8.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               IconButton(
                 onPressed: controller.onCreateEntryPressed,
-                icon: const Icon(CustomIcons.inventory_in, color: Colors.white),
+                icon: Icon(CustomIcons.inventory_in,
+                    color: theme.colorScheme.secondary),
               ),
-              const Padding(padding: EdgeInsets.all(8.0)),
               IconButton(
                 onPressed: controller.onCreateExitPressed,
-                icon: const Icon(CustomIcons.inventory_ou, color: Colors.white),
+                icon: Icon(CustomIcons.inventory_ou,
+                    color: theme.colorScheme.secondary),
               ),
             ],
           ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Theme.of(context).primaryColor,
         onPressed: controller.onMainActionPressed,
         child: const Icon(CustomIcons.package_plus),
       ),
