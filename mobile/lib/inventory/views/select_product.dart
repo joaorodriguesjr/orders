@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:delivery/controllers.dart';
-import 'package:delivery/widgets.dart';
+import 'package:mobile/controllers.dart';
+import 'package:mobile/widgets.dart';
 
 class SelectProductView extends StatelessWidget {
   final SelectProductControllerState controller;

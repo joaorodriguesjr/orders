@@ -1,6 +1,6 @@
-import 'package:delivery/controllers.dart';
-import 'package:delivery/icons.dart';
-import 'package:delivery/views.dart';
+import 'package:mobile/controllers.dart';
+import 'package:mobile/icons.dart';
+import 'package:mobile/views.dart';
 import 'package:flutter/material.dart';
 
 class DashboardView extends StatelessWidget {

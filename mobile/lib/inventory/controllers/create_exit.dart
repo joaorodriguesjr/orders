@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:inventory/inventory.dart';
-import 'package:delivery/instances.dart';
-import 'package:delivery/helpers.dart';
-import 'package:delivery/views.dart';
+import 'package:mobile/instances.dart';
+import 'package:mobile/helpers.dart';
+import 'package:mobile/views.dart';
 
-class CreateEntryController extends StatefulWidget {
-  const CreateEntryController({Key? key}) : super(key: key);
+class CreateExitController extends StatefulWidget {
+  const CreateExitController({Key? key}) : super(key: key);
 
   @override
-  State<CreateEntryController> createState() => CreateEntryControllerState();
+  State<CreateExitController> createState() => CreateExitControllerState();
 }
 
-class CreateEntryControllerState extends State<CreateEntryController> {
+class CreateExitControllerState extends State<CreateExitController> {
   Product product = Product()
     ..name = 'Produto'
     ..description = 'Selectionar um produto';
@@ -19,12 +19,12 @@ class CreateEntryControllerState extends State<CreateEntryController> {
   onFormData(Map<String, dynamic> data) async {
     if (product.code.isEmpty) {
       const snackBar = SnackBar(
-          content: Text('Selecione um produto para registrar uma entrada.'));
+          content: Text('Selecione um produto para registrar uma saída.'));
       return ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
 
     final persistence = Persistence.of<RecordsPersistence>(context);
-    final record = Record.createEntryRecord(data, product);
+    final record = Record.createExitRecord(data, product);
     persistence.persist(record);
 
     Navigator.of(context).pop();
@@ -53,6 +53,6 @@ class CreateEntryControllerState extends State<CreateEntryController> {
 
   @override
   Widget build(BuildContext context) {
-    return CreateEntryView(controller: this);
+    return CreateExitView(controller: this);
   }
 }

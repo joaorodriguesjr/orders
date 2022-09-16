@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:inventory/inventory.dart';
-import 'package:delivery/controllers.dart';
+import 'package:mobile/controllers.dart';
 
 class ListProductsView extends StatelessWidget {
   final ListProductsControllerState controller;

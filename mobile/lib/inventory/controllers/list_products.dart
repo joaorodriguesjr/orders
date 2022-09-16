@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:inventory/inventory.dart';
-import 'package:delivery/instances.dart';
-import 'package:delivery/views.dart';
+import 'package:mobile/instances.dart';
+import 'package:mobile/views.dart';
 
 class ListProductsController extends StatefulWidget {
   const ListProductsController({super.key});

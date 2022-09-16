@@ -1,6 +1,6 @@
-import 'package:delivery/controllers.dart';
-import 'package:delivery/forms.dart';
-import 'package:delivery/views.dart';
+import 'package:mobile/controllers.dart';
+import 'package:mobile/forms.dart';
+import 'package:mobile/views.dart';
 import 'package:flutter/material.dart';
 
 class CreateEntryView extends StatelessWidget {
