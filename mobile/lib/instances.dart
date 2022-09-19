@@ -14,7 +14,9 @@ var _providers = [
   ),
   Provider<data_inventory.FirestoreRecords>(
     create: (_) => data_inventory.FirestoreRecords(
-        inventoryFirestore.collection('records')),
+      inventoryFirestore.collection('records'),
+      inventoryFirestore.collection('products'),
+    ),
   ),
   Provider<inventory.ProductsQuery>(
     create: (context) =>
