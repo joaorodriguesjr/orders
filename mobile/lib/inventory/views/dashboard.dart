@@ -26,7 +26,7 @@ class DashboardView extends StatelessWidget {
           ),
         ],
       ),
-      body: const Body(child: Center(child: Text('...'))),
+      body: const Body(child: Center()),
       floatingActionButtonLocation: FloatingActionButtonLocation.startDocked,
       bottomNavigationBar: BottomAppBar(
         shape: const CircularNotchedRectangle(),
