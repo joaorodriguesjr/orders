@@ -13,7 +13,7 @@ class CreateProductView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Adicionar Produto'),
+        title: const Text('Novo Produto'),
         actions: [
           IconButton(
             onPressed: () {},
