@@ -12,4 +12,5 @@ class CustomIcons {
       IconData(0xe901, fontFamily: _fontFamily);
 
   static const IconData package_plus = MdiIcons.packageVariantPlus;
+  static const IconData inventory = MdiIcons.libraryShelves;
 }

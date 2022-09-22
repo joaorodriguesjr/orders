@@ -15,7 +15,7 @@ class DashboardView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.dashboard),
+          icon: const Icon(CustomIcons.inventory),
           onPressed: () {},
         ),
         title: const Text('Estoque'),
